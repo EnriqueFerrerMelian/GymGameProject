@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/custom_bottom_sheet01">
+
+
+    <LinearLayout
+        android:id="@+id/peso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_weight"
+            android:layout_gravity="center"
+            android:text="@string/peso"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center">
+
+            <NumberPicker
+                android:id="@+id/numberPeso"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="."
+                android:textSize="24sp" />
+
+            <NumberPicker
+                android:id="@+id/numberPesoDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=" Kg"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/repeticiones_series"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_sets"
+            android:layout_gravity="center"
+            android:text="Repeticiones y series"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center">
+
+            <NumberPicker
+                android:id="@+id/repeticiones"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="x"
+                android:textSize="24sp" />
+
+            <NumberPicker
+                android:id="@+id/series"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tiempoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_time"
+            android:layout_gravity="center"
+            android:text="Tiempo"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAlignment="center">
+
+            <NumberPicker
+                android:id="@+id/minutos"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=" : "
+                android:textSize="24sp" />
+
+            <NumberPicker
+                android:id="@+id/segundos"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/aceptar"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Aceptar"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:backgroundTint="@color/verdeOscuro"/>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="Cancelar"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:backgroundTint="@color/verdeOscuro"/>
+    </LinearLayout>
+</LinearLayout>

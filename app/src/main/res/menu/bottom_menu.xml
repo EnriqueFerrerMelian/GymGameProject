@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Rutinas"
+        android:id="@+id/ejercicio"
+        android:icon="@drawable/baseline_fitness_center_24"/>
+    <item
+        android:title="Estadísticas"
+        android:id="@+id/estadisticas"
+        android:icon="@drawable/baseline_insights_24"/>
+    <item
+        android:title="Actividades"
+        android:id="@+id/actividades"
+        android:icon="@drawable/baseline_ballot_24"/>
+    <item
+        android:title="Calendario"
+        android:id="@+id/calendario"
+        android:icon="@drawable/baseline_calendar_month_24"/>
+</menu>

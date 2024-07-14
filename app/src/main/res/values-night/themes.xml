@@ -1,0 +1,52 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Olimplicacion" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colores primarios de la marca -->
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorPrimaryVariant">@color/grey</item>
+        <item name="colorOnPrimary">@color/grey</item>
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/grey</item>
+        <item name="colorSecondaryVariant">@color/grey</item>
+        <item name="colorOnSecondary">@color/grey</item>
+        <!-- Status bar color.-->
+        <item name="android:statusBarColor" tools:targetApi="p">?attr/colorPrimaryVariant</item>
+    </style>
+    <!-- Dark Mode *********************************************-->
+    <!-- Background si darkmode está activo -->
+    <style name="SCREEN">
+        <item name="android:background">@color/backgroundDM</item>
+    </style>
+    <!-- Texto si darkmode está activo -->
+    <style name="TEXT">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="TITULO">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+    <style name="SEMANA">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+    <!-- Botones si darkmode está activo -->
+    <style name="BUTTON">
+        <item name="android:background">@color/verdeClaro</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="EDITTEXT">
+        <item name="android:background">#303030</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:hint">#D3D3D3</item>
+    </style>
+    <style name="VIEW">
+        <item name="android:background">#FFFFFF</item>
+    </style>
+    <style name="MAS">
+        <item name="android:background">#5E5E5E</item>
+    </style>
+    <!-- Dark Mode ******************************************fin-->
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tablon.DetalleNoticiaFragment">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded2"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="17dp"
+        android:text="TextView"
+        style="@style/TITULO"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_below="@+id/titulo"
+        android:layout_height="2dp"
+        android:layout_margin="8dp"
+        android:background="#1282EF"/>
+
+    <TextView
+        android:id="@+id/contenido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/titulo"
+        android:layout_alignParentStart="true"
+        android:textSize="18dp"
+        android:justificationMode="inter_word"
+        android:text="Hacer ejercicio es un paso importante para tener una vida saludable. Cuando te mueves, aceleras tu corazón y le ayudas a combatir la fatiga y el impulso de levantarte cada mañana. Es una manera eficaz de despertar tus músculos y calentar el cuerpo para el día que empieza. Por lo tanto, levántate temprano para activar tu cuerpo y que se te haga más fácil despertarte. No es necesario ir al gimnasio o realizar una sesión de entrenamiento, solo tienes que incluir en tu rutina ejercicios fáciles y rápidos que hagan que tu cuerpo esté activo durante todo el día."
+        style="@style/TEXT"/>
+</RelativeLayout>

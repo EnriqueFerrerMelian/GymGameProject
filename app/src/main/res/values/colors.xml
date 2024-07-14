@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#919191</color>
+    <color name="darkgrey">#2b2b2b</color>
+    <color name="verdeClaro">#b8e0d2</color>
+    <color name="verdeOscuro">#2B717C</color>
+    <color name="azulLogo">#004990</color>
+    <color name="naranja">#FF7F27</color>
+    <color name="backgroundDM">#232323</color>
+    <color name="random2">#e2e2e2</color>
+    <color name="random3">#ffee93</color>
+    <color name="random4">#ffc09f</color>
+
+</resources>

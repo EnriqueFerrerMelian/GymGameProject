@@ -1,0 +1,84 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Olimplicacion" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colores primarios de la marca -->
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorPrimaryVariant">@color/grey</item>
+        <item name="colorOnPrimary">@color/grey</item>
+        <!-- Colores secundarios -->
+        <item name="colorSecondary">@color/grey</item>
+        <item name="colorSecondaryVariant">@color/grey</item>
+        <item name="colorOnSecondary">@color/grey</item>
+        <!-- Status bar color.-->
+        <item name="android:statusBarColor" tools:targetApi="p">?attr/colorPrimaryVariant</item>
+    </style>
+    <!-- Light Mode *********************************************-->
+    <!-- Background si lightmode está activo -->
+    <style name="SCREEN">
+        <item name="android:background">#FFF</item>
+    </style>
+    <!-- Texto si lightmode está activo -->
+    <style name="TEXT">
+        <item name="android:textColor">#000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TITULO">
+        <item name="android:textColor">#353535</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+    <style name="SEMANA">
+        <item name="android:textColor">#5A5A5A</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+    <!-- Botones si lightmode está activo -->
+    <style name="BUTTON">
+        <item name="android:background">@color/verdeOscuro</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- EditText si lightmode está activo -->
+    <style name="EDITTEXT">
+        <item name="android:background">#DADADA</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="VIEW">
+        <item name="android:background">#131313</item>
+    </style>
+    <style name="MAS">
+        <item name="android:background">#43A047</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+    <!-- Light Mode ******************************************fin-->
+    <style name="Theme.Olimplicacion" parent="Base.Theme.Olimplicacion" />
+
+    <!--estilo del calendario ***-->
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/azulLogo</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="CalenderViewDateCustomText" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@drawable/calender_date_selector</item>
+    </style>
+    <!--estilo del calendario fin-->
+
+    <!-- Establece el estilo de las esquinas-->
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="roundedImageViewRounded2">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">9%</item>
+    </style>
+    <style name="roundedImageViewRounded3">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">5%</item>
+    </style>
+</resources>

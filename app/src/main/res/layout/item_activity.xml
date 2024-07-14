@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="20dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_margin="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SCREEN">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="225dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/actividad_ejercicio_r" />
+        <TextView
+            android:id="@+id/nombreActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="198dp"
+            android:layout_marginTop="-9dp"
+            android:layout_marginEnd="12dp"
+            android:text="ActividadNombre"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/descripcionActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_below="@+id/nombreActividad"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="228dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="12dp"
+            android:text="ActividadDescripcion"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imgActividad"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            style="@style/SCREEN"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lunes"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="L"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/martes"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="M"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/miercoles"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/jueves"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="J"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/viernes"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="V"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/sabado"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/domingo"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="D"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+        </LinearLayout>
+        <!-- <View
+             android:id="@+id/divider1"
+             style="@style/VIEW"
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginStart="8dp"
+             android:layout_marginTop="8dp"
+             android:layout_marginEnd="8dp"
+             android:layout_marginBottom="8dp" />-->
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Olimplicacion</string>
+    <string name="client_id">911533527631-em4u3kon7ad0h5if0up5vfulmu0o71rq.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="peso">Peso:</string>
+    <string name="repeticiones">Repeticiones:</string>
+    <string name="modificar">Modificar</string>
+    <string name="ejercicios">Ejercicios</string>
+    <string name="descripcionEjercicio">Imagen que muestra cómo se hace el ejercicio.</string>
+    <string name="espacio">" "</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="acepBtn">Aceptar</string>
+    <string name="a_adir_ejercicio"> añadir ejercicio</string>
+    <string name="anadir">Añadir</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="sobrescribir">Ya existe una rutina con ese nombre.\n Deseas sobrescribir?</string>
+    <string name="atras"><![CDATA[<-]]></string>
+    <string name="adelante"><![CDATA[->]]></string>
+    <string name="repeticiones_y_series">Repeticiones y series:</string>
+
+</resources>

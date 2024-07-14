@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragmentos.EstadisticasFragment"
+    style="@style/SCREEN">
+    <TextView
+        android:id="@+id/textoInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Debe refrescarse la pantalla al insertar datos por primera vez."
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TEXT"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textoInfo">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="20dp"
+                app:layout_constraintStart_toStartOf="parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pesoTV"
+                        style="@style/TEXT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Peso"
+                        android:textAlignment="center"
+                        android:textSize="22dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ultimoTV"
+                        style="@style/TEXT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Último peso añadido"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/ultimoPeso"
+                        style="@style/TEXT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="último peso añadido"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/ultimoTV" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/white"
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:scrollbars="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/ultimoPeso" />
+
+                    <LinearLayout
+                        android:id="@+id/botonesLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/lineChart">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/aniadirPeso"
+                            style="@style/BUTTON"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:layout_weight="1"
+                            android:text="Añadir peso"
+                            android:textAllCaps="false"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/aniadirObjetivo"
+                            style="@style/BUTTON"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:layout_weight="1"
+                            android:text="Añadir objetivo"
+                            android:textAllCaps="false"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/eliminarPeso"
+                            style="@style/BUTTON"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:layout_weight="1"
+                            android:text="Eliminar peso"
+                            android:textAllCaps="false"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_below="@+id/cardView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/progresoTV"
+                        style="@style/TEXT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Progreso"
+                        android:textAlignment="center"
+                        android:textSize="22dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+                    <TextView
+                        android:id="@+id/ultimoPesoTV"
+                        style="@style/TEXT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Último progreso actualizado"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/progresoTV" />
+
+                    <TextView
+                        android:id="@+id/ultimoProgreso"
+                        style="@style/TEXT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Último progreso añadido"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/ultimoPesoTV" />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/white"
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:scrollbars="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/ultimoProgreso" />
+
+                    <LinearLayout
+                        android:id="@+id/botonLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/barChart">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/eliminarAvance"
+                            style="@style/BUTTON"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="1dp"
+                            android:layout_weight="1"
+                            android:text="Eliminar registro seleccionado"
+                            android:textAllCaps="false"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
