@@ -4,37 +4,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Activity  {
-    String nombre, precio, descripcion, vacantes, profesor, horario, img1, img2, fecha;
-    List<String> dias;
+    String name, price, description, vacancies, teacher, schedule, img1, img2, date;
+    List<String> days;
 
-    public Actividad(){
-        this.dias = new ArrayList<>();
+    public Activity(){
+        this.days = new ArrayList<>();
     }
 
-    public Actividad(String nombre, String precio, String descripcion, String vacantes, String profesor, String horario) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.vacantes = vacantes;
-        this.profesor = profesor;
-        this.horario = horario;
-        this.dias = new ArrayList<>();
+    public Activity(String name, String price, String description, String vacancies, String teacher, String schedule) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.vacancies = vacancies;
+        this.teacher = teacher;
+        this.schedule = schedule;
+        this.days = new ArrayList<>();
     }
 
-    public List<String> getDias() {
-        return dias;
+    public String getName() {
+        return name;
     }
 
-    public void setDias(List<String> dias) {
-        this.dias = dias;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getPrice() {
+        return price;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getVacancies() {
+        return vacancies;
+    }
+
+    public void setVacancies(String vacancies) {
+        this.vacancies = vacancies;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 
     public String getImg1() {
@@ -53,63 +85,35 @@ public class Activity  {
         this.img2 = img2;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getDate() {
+        return date;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getPrecio() {
-        return precio;
+    public List<String> getDays() {
+        return days;
     }
 
-    public void setPrecio(String precio) {
-        this.precio = precio;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getVacantes() {
-        return vacantes;
-    }
-
-    public void setVacantes(String vacantes) {
-        this.vacantes = vacantes;
-    }
-
-    public String getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(String profesor) {
-        this.profesor = profesor;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
+    public void setDays(List<String> days) {
+        this.days = days;
     }
 
     @Override
     public String toString() {
-        return "Actividad{" +
-                "nombre='" + nombre + '\'' +
-                ", precio='" + precio + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", vacantes='" + vacantes + '\'' +
-                ", profesor='" + profesor + '\'' +
-                ", horario='" + horario + '\'' +
+        return "Activity{" +
+                "name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", description='" + description + '\'' +
+                ", vacancies='" + vacancies + '\'' +
+                ", teacher='" + teacher + '\'' +
+                ", schedule='" + schedule + '\'' +
+                ", img1='" + img1 + '\'' +
+                ", img2='" + img2 + '\'' +
+                ", date='" + date + '\'' +
+                ", days=" + days +
                 '}';
     }
 }

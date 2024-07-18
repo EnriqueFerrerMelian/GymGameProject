@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         style="@style/SCREEN">
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgActividad"
+            android:id="@+id/imgActivity"
             android:layout_width="wrap_content"
             android:layout_height="225dp"
             android:layout_alignParentStart="true"
@@ -26,7 +26,7 @@
             android:layout_marginEnd="8dp"
             android:src="@drawable/actividad_ejercicio_r" />
         <TextView
-            android:id="@+id/nombreActividad"
+            android:id="@+id/activityName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linearLayout2"
@@ -41,10 +41,10 @@
             android:textSize="18dp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/descripcionActividad"
+            android:id="@+id/activityDescription"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_below="@+id/nombreActividad"
+            android:layout_below="@+id/activityName"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="228dp"
@@ -58,7 +58,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imgActividad"
+            android:layout_alignTop="@+id/imgActivity"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
@@ -66,15 +66,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/lunes"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:text="L"
-                android:textAlignment="center"
-                style="@style/SEMANA"/>
-
-            <TextView
-                android:id="@+id/martes"
+                android:id="@+id/monday"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="M"
@@ -82,7 +74,15 @@
                 style="@style/SEMANA"/>
 
             <TextView
-                android:id="@+id/miercoles"
+                android:id="@+id/tuesday"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="T"
+                android:textAlignment="center"
+                style="@style/SEMANA"/>
+
+            <TextView
+                android:id="@+id/wednesday"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="X"
@@ -90,23 +90,23 @@
                 style="@style/SEMANA"/>
 
             <TextView
-                android:id="@+id/jueves"
+                android:id="@+id/thursday"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="J"
+                android:text="T"
                 android:textAlignment="center"
                 style="@style/SEMANA"/>
 
             <TextView
-                android:id="@+id/viernes"
+                android:id="@+id/friday"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="V"
+                android:text="F"
                 android:textAlignment="center"
                 style="@style/SEMANA"/>
 
             <TextView
-                android:id="@+id/sabado"
+                android:id="@+id/saturday"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="S"
@@ -114,21 +114,12 @@
                 style="@style/SEMANA"/>
 
             <TextView
-                android:id="@+id/domingo"
+                android:id="@+id/sunday"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
-                android:text="D"
+                android:text="S"
                 android:textAlignment="center"
                 style="@style/SEMANA"/>
         </LinearLayout>
-        <!-- <View
-             android:id="@+id/divider1"
-             style="@style/VIEW"
-             android:layout_width="match_parent"
-             android:layout_height="1dp"
-             android:layout_marginStart="8dp"
-             android:layout_marginTop="8dp"
-             android:layout_marginEnd="8dp"
-             android:layout_marginBottom="8dp" />-->
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

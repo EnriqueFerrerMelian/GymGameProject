@@ -14,6 +14,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.MainActivity;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.databinding.FragmentActivitiesDetailsBinding;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -314,88 +320,88 @@ public class AppHelper {
     // ESTADÍSTICAS**********************************ESTADÍSTICAS**********************************
 
     // ACTIVIDADES**********************************ACTIVIDADES**********************************
-    public static void cargarActividad(FragmentDetallesActividadBinding binding, Context context, Actividad actividad){
-        if (actividad.getDias().contains("l")) {
-            binding.lunes.setTextColor(Color.rgb(255, 127, 39));
+    public static void loadActivity(FragmentActivitiesDetailsBinding binding, Context context, Activity activity){
+        if (activity.getDays().contains("l")) {
+            binding.monday.setTextColor(Color.rgb(255, 127, 39));
         }
-        if (actividad.getDias().contains("m")) {
-            binding.martes.setTextColor(Color.rgb(255, 127, 39));
+        if (activity.getDays().contains("m")) {
+            binding.tuesday.setTextColor(Color.rgb(255, 127, 39));
         }
-        if (actividad.getDias().contains("x")) {
-            binding.miercoles.setTextColor(Color.rgb(255, 127, 39));
+        if (activity.getDays().contains("x")) {
+            binding.wednesday.setTextColor(Color.rgb(255, 127, 39));
         }
-        if (actividad.getDias().contains("j")) {
-            binding.jueves.setTextColor(Color.rgb(255, 127, 39));
+        if (activity.getDays().contains("j")) {
+            binding.thursday.setTextColor(Color.rgb(255, 127, 39));
         }
-        if (actividad.getDias().contains("v")) {
-            binding.viernes.setTextColor(Color.rgb(255, 127, 39));
+        if (activity.getDays().contains("v")) {
+            binding.friday.setTextColor(Color.rgb(255, 127, 39));
         }
-        if (actividad.getDias().contains("s")) {
-            binding.sabado.setTextColor(Color.rgb(255, 127, 39));
+        if (activity.getDays().contains("s")) {
+            binding.saturday.setTextColor(Color.rgb(255, 127, 39));
         }
-        if (actividad.getDias().contains("d")) {
-            binding.domingo.setTextColor(Color.rgb(255, 127, 39));
+        if (activity.getDays().contains("d")) {
+            binding.sunday.setTextColor(Color.rgb(255, 127, 39));
         }
         Glide.with(context)
-                .load(actividad.getImg2())
+                .load(activity.getImg2())
                 .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                 .error(R.drawable.logo)//si ocurre algún error se verá por defecto
                 .fitCenter()
                 .override(1000)
-                .into(binding.imagenActividad);
-        binding.nombreActividad.setText(actividad.getNombre());
-        binding.descripcionActividad.append(actividad.getDescripcion());
-        binding.profesorActividad.append(actividad.getProfesor());
-        binding.horariosActividad.append(actividad.getHorario());
-        binding.vacantesActividad.append(actividad.getVacantes());
-        binding.precioActividad.append(actividad.getPrecio());
+                .into(binding.activityImg);
+        binding.activityName.setText(activity.getName());
+        binding.activityDescription.append(activity.getDescription());
+        binding.activitySchedules.append(activity.getSchedule());
+        binding.activityTeacher.append(activity.getTeacher());
+        binding.activityVacancies.append(activity.getVacancies());
+        binding.activityPrices.append(activity.getPrice());
     }
-    public static void reservarActividad(Actividad actividad, Context context){
+    public static void bookActivity(Activity activity, Context context){
         //si hay vacantes
         //Obtengo la fecha de hoy
         Calendar cal = new GregorianCalendar();
         Date date = cal.getTime();
         String fecha = date.getYear() +"/"+ date.getMonth()+"/"+ date.getDate()+"";
-        int vacantes = Integer.parseInt(actividad.getVacantes())-1;
-        actividad.setVacantes(String.valueOf(vacantes));
-        actividad.setFecha(fecha);
+        int vacantes = Integer.parseInt(activity.getVacancies())-1;
+        activity.setVacancies(String.valueOf(vacantes));
+        activity.setDate(fecha);
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/actividades/"+actividad.getNombre());
-        ref.setValue(actividad).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .getReference("usuarios/"+ MainActivity.getUserOB().getId()+"/actividades/"+activity.getName());
+        ref.setValue(activity).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 escribirToast("Actividad reservada", context);
-                actualizarVacante(actividad);
+                actualizarVacante(activity);
             }
         });
     }
-    public static void eliminarReserva(Actividad actividad, Context context){
-        int vacantes = Integer.parseInt(actividad.getVacantes())+1;
-        actividad.setVacantes(String.valueOf(vacantes));
+    public static void deleteReservation(Activity activity, Context context){
+        int vacancies = Integer.parseInt(activity.getVacancies())+1;
+        activity.setVacancies(String.valueOf(vacancies));
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/actividades/"+actividad.getNombre());
+                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/actividades/"+activity.getName());
         ref.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 escribirToast("Reserva eliminada", context);
-                actualizarVacante(actividad);
+                updateVacancy(activity);
             }
         });
     }
-    public static void actualizarVacante(Actividad actividad){
+    public static void updateVacancy(Activity activity){
         //.out.println("actualizarVacante()");
         DatabaseReference ref1 = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("actividades/"+actividad.getNombre());
+                .getReference("actividades/"+activity.getName());
         ref1.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 DatabaseReference ref2 = FirebaseDatabase
                         .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                        .getReference("actividades/"+actividad.getNombre());
-                ref2.setValue(actividad).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .getReference("actividades/"+activity.getName());
+                ref2.setValue(activity).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         actualizarApp();

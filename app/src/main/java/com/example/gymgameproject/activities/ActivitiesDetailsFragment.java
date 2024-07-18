@@ -9,7 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gymgameproject.MainActivity;
+import com.example.gymgameproject.MenuPrincipal;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Activity;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.databinding.FragmentActivitiesDetailsBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,16 +22,16 @@ import com.example.gymgameproject.R;
  * create an instance of this fragment.
  */
 public class ActivitiesDetailsFragment extends Fragment{
-    private static Actividad actividad;
-    private FragmentDetallesActividadBinding binding;
+    private static Activity activity;
+    private FragmentActivitiesDetailsBinding binding;//FragmentDetallesActividadBinding
 
-    public DetallesActividadFragment() {
+    public ActivitiesDetailsFragment() {
         // Required empty public constructor
     }
-    public static DetallesActividadFragment newInstance(Actividad actividadF) {
-        DetallesActividadFragment fragment = new DetallesActividadFragment();
-        actividad = actividadF;
-        AppHelper.cambiarToolbarText(actividad.getNombre());
+    public static ActivitiesDetailsFragment newInstance(Activity activityF) {
+        ActivitiesDetailsFragment fragment = new ActivitiesDetailsFragment();
+        activity = activityF;
+        AppHelper.cambiarToolbarText(activity.getName());
         return fragment;
     }
 
@@ -37,25 +42,25 @@ public class ActivitiesDetailsFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDetallesActividadBinding.inflate(inflater, container, false);
+        binding = FragmentActivitiesDetailsBinding.inflate(inflater, container, false);
         ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        AppHelper.cargarActividad(binding, getContext(), actividad);
+        AppHelper.loadActivity(binding, getContext(), activity);
         boolean esta = false;
         //se busca las actividades reservadas por el usuario
-        for (int i = 0; i < MainActivity.getActividadesOBs().size(); i++) {
-            if(MainActivity.getActividadesOBs().get(i).getNombre().equals(actividad.getNombre())){
+        for (int i = 0; i < MainActivity.getActivitiesOBs().size(); i++) {
+            if(MainActivity.getActivitiesOBs().get(i).getName().equals(activity.getName())){
                 esta = true;
             }
         }
         //si la actividad no está reservada
         if (!esta) {
             //se activa el onclick listener
-            binding.reservar.setOnClickListener(new View.OnClickListener() {
+            binding.reserve.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(Integer.valueOf(actividad.getVacantes())>1) {
-                        AppHelper.reservarActividad(actividad, getContext());
+                    if(Integer.valueOf(activity.getVacancies())>1) {
+                        AppHelper.bookActivity(activity, getContext());
                         getParentFragmentManager().popBackStack();
                     }else{
                         System.out.println("No quedan vacantes para esa actividad");
@@ -63,21 +68,21 @@ public class ActivitiesDetailsFragment extends Fragment{
                     }
                 }
             });
-            binding.eliminarReserva.setText("");
-            binding.eliminarReserva.setTextColor(Color.BLACK);
-            binding.eliminarReserva.setBackgroundColor(Color.TRANSPARENT);
+            binding.deleteReservation.setText("");
+            binding.deleteReservation.setTextColor(Color.BLACK);
+            binding.deleteReservation.setBackgroundColor(Color.TRANSPARENT);
         } else {
-            binding.eliminarReserva.setOnClickListener(new View.OnClickListener() {
+            binding.deleteReservation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppHelper.eliminarReserva(actividad, getContext());
+                    AppHelper.deleteReservation(activity, getContext());
                     getParentFragmentManager().popBackStack();
                 }
             });
             //si no el botoón cambia de aspecto
-            binding.reservar.setText("Ya reservado");
-            binding.reservar.setTextColor(Color.BLACK);
-            binding.reservar.setBackgroundColor(Color.TRANSPARENT);
+            binding.reserve.setText("Ya reservado");
+            binding.reserve.setTextColor(Color.BLACK);
+            binding.reserve.setBackgroundColor(Color.TRANSPARENT);
         }
         return binding.getRoot();
     }

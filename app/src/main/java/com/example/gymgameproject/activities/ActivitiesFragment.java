@@ -13,26 +13,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gymgameproject.MenuPrincipal;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Activity;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.databinding.FragmentActivitiesBinding;
+import com.example.gymgameproject.databinding.FragmentActivitiesDetailsBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ActivitiesFragment#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
-public class ActivitiesFragment extends Fragment implements ActividadFbAdapter.ItemClickListener{
+public class ActivitiesFragment extends Fragment implements ActivitiesFbAdapter.ItemClickListener{
     //recyclerView **********
-    private ActividadFbAdapter actividadFbAdapter;//adaptador
+    private ActivitiesFbAdapter activitiesFbAdapter;//adaptador
     private RecyclerView recyclerView;
     //recyclerView *******fin
 
     //variables globales
-    private FragmentActividadesBinding binding;
+    private FragmentActivitiesBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentActividadesBinding.inflate(inflater, container, false);
+        binding = FragmentActivitiesBinding.inflate(inflater, container, false);
         AppHelper.cambiarToolbarText("Actividades");
         ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return binding.getRoot();
@@ -41,26 +48,26 @@ public class ActivitiesFragment extends Fragment implements ActividadFbAdapter.I
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        FirebaseRecyclerOptions<Actividad> options =
-                new FirebaseRecyclerOptions.Builder<Actividad>()
+        FirebaseRecyclerOptions<Activity> options =
+                new FirebaseRecyclerOptions.Builder<Activity>()
                         .setQuery(FirebaseDatabase.getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                                .getReference("actividades"), Actividad.class)
+                                .getReference("actividades"), Activity.class)
                         .build();
-        actividadFbAdapter = new ActividadFbAdapter(options, this::onItemClick);
+        activitiesFbAdapter = new ActivitiesFbAdapter(options, this::onItemClick);
         recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(actividadFbAdapter);
+        recyclerView.setAdapter(activitiesFbAdapter);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        actividadFbAdapter.startListening();
+        activitiesFbAdapter.startListening();
     }
     @Override
     public void onStop() {
         super.onStop();
-        actividadFbAdapter.stopListening();
+        activitiesFbAdapter.stopListening();
     }
     /**
      * Este método se pasará a rutinaFbAdapter. De manera que cuando se haga click en una rutina se ejecute el
@@ -68,8 +75,8 @@ public class ActivitiesFragment extends Fragment implements ActividadFbAdapter.I
      * @param actividad
      */
     @Override
-    public void onItemClick(Actividad actividad) {
-        Fragment fragment = DetallesActividadFragment.newInstance(actividad);
+    public void onItemClick(Activity actividad) {
+        Fragment fragment = ActivitiesDetailsFragment.newInstance(actividad);
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment, "nota").addToBackStack(null);
         fragmentTransaction.commit();

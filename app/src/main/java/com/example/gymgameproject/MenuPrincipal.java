@@ -14,6 +14,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.gymgameproject.activities.ActivitiesFragment;
+import com.example.gymgameproject.calendar.CalendarFragment;
+import com.example.gymgameproject.databinding.ActivityMenuPrincipalBinding;
+import com.example.gymgameproject.fragments.ProfileFragment;
+import com.example.gymgameproject.fragments.StadisticsFragment;
+import com.example.gymgameproject.routines.RoutineFragment;
+import com.example.gymgameproject.tabloid.TabloidFragment;
+
 public class MenuPrincipal extends AppCompatActivity {
     private static Fragment fragmentoDesechable = null;//se usa para controlar la transacción entre fragmentos
     private static ActivityMenuPrincipalBinding binding;
@@ -25,20 +33,20 @@ public class MenuPrincipal extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
 
         //codigo
-        reemplazarFragmento(new RutinaFragment());
+        reemplazarFragmento(new RoutineFragment());
         //listeners
         binding.bottomnav.setOnItemSelectedListener(item ->{
             if(item.getItemId()==R.id.ejercicio){
-                reemplazarFragmento(new RutinaFragment());
+                reemplazarFragmento(new RoutineFragment());
             }
             if(item.getItemId()==R.id.estadisticas){
-                reemplazarFragmento(new EstadisticasFragment());
+                reemplazarFragmento(new StadisticsFragment());
             }
             if(item.getItemId()==R.id.actividades){
-                reemplazarFragmento(new ActividadesFragment());
+                reemplazarFragmento(new ActivitiesFragment());
             }
             if(item.getItemId()==R.id.calendario){
-                reemplazarFragmento(new CalendarioFragment());
+                reemplazarFragmento(new CalendarFragment());
             }
             return true;
         });
@@ -53,10 +61,10 @@ public class MenuPrincipal extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.perfil){
-            reemplazarFragmento(new PerfilFragment());
+            reemplazarFragmento(new ProfileFragment());
         }
         if(item.getItemId()==R.id.tablon){
-            reemplazarFragmento(new TablonFragment());
+            reemplazarFragmento(new TabloidFragment());
         }
         if(item.getItemId()==16908332){
             getSupportFragmentManager().popBackStack();

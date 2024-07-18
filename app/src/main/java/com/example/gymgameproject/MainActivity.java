@@ -11,6 +11,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.gymgameproject.classes.Activity;
+import com.example.gymgameproject.classes.Advance;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.classes.Routine;
+import com.example.gymgameproject.classes.User;
+import com.example.gymgameproject.classes.Weight;
+import com.example.gymgameproject.databinding.ActivityMainBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,12 +38,12 @@ import java.util.List;
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static Usuario usuarioOB = new Usuario();
-    private static Peso pesoOB = new Peso();
-    private static Avance avanceOB = new Avance();
-    private static List<Actividad> actividadesOBs = new ArrayList<>();
-    private static List<Rutina> rutinasOBs = new ArrayList<>();
-    private static Boolean confirmado = false;
+    private static User userOB = new User();
+    private static Weight weightOb = new Weight();
+    private static Advance advanceOB = new Advance();
+    private static List<Activity> activitiesOBs = new ArrayList<>();
+    private static List<Routine> routinesOBs = new ArrayList<>();
+    private static Boolean confirmed = false;
 
     ActivityMainBinding binding;
 
@@ -46,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 "https://firebasestorage.googleapis.com/v0/b/olimplicacion-3ba86.appspot.com/o/Curl%20femoral%20con%20maquina.png?alt=media&token=d81940ba-7855-4cf0-abaa-b69c6fe44c01",
                 "Femorales");*/
         //listeners
-        binding.boton.setOnClickListener(new View.OnClickListener() {
+        binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(binding.nombre.getText().length()>0 && binding.clave.getText().length()>0){
@@ -85,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean confirmado = false;
                 for (DataSnapshot data: dataSnapshot.getChildren()) {//
                     if(data.child("usuario").getValue().equals(usuarioEncriptado) && data.child("clave").getValue().equals(claveEncriptada)){
-                        usuarioOB.setId(data.getKey());
+                        userOB.setId(data.getKey());
                         AppHelper.actualizarApp();
                         confirmado=true;
                         //ejecuto el fragmento 'MenuPrincipal'
@@ -127,61 +140,61 @@ public class MainActivity extends AppCompatActivity {
         Calendar cal = new GregorianCalendar();
         Date date = cal.getTime();
         int a1 = Integer.valueOf(date.getYear()),b1 = Integer.valueOf(date.getMonth()),c1 = Integer.valueOf(date.getDate());
-        for (int i = 0; i < actividadesOBs.size(); i++) {
-            String[] fechas2 = actividadesOBs.get(i).getFecha().split("/");
+        for (int i = 0; i < activitiesOBs.size(); i++) {
+            String[] fechas2 = activitiesOBs.get(i).getDate().split("/");
             int a2 = Integer.valueOf(fechas2[0]),b2 = Integer.valueOf(fechas2[1]),c2 = Integer.valueOf(fechas2[2]);
             if(a1>a2 || (a1==a2 && b1>b2) || (a1==a2 && b1==b2 && (c1-c2>4))){
-                AppHelper.eliminarReserva(actividadesOBs.remove(i), context);
+                AppHelper.deleteReservation(activitiesOBs.remove(i), context);
             }
         }
     }
     //SETTERS Y GETTERS
-    public static Usuario getUsuarioOB() {
-        return usuarioOB;
+    public static User getUserOB() {
+        return userOB;
     }
 
-    public static void setUsuarioOB(Usuario usuarioOB) {
-        MainActivity.usuarioOB = usuarioOB;
+    public static void setUserOB(User userOb) {
+        MainActivity.userOB = userOb;
     }
 
-    public static Peso getPesoOB() {
-        return pesoOB;
+    public static Weight getWeightOB() {
+        return weightOb;
     }
 
-    public static void setPesoOB(Peso pesoOB) {
-        MainActivity.pesoOB = pesoOB;
+    public static void setWeightOB(Weight pesoOB) {
+        MainActivity.weightOb = pesoOB;
     }
 
-    public static Avance getAvanceOB() {
-        return avanceOB;
+    public static Advance getAdvanceOB() {
+        return advanceOB;
     }
 
-    public static void setAvanceOB(Avance avanceOB) {
-        MainActivity.avanceOB = avanceOB;
+    public static void setAdvanceOB(Advance avanceOB) {
+        MainActivity.advanceOB = avanceOB;
     }
 
-    public static List<Actividad> getActividadesOBs() {
-        return actividadesOBs;
+    public static List<Activity> getActivitiesOBs() {
+        return activitiesOBs;
     }
 
-    public static void setActividadesOBs(List<Actividad> actividadesOBs) {
-        MainActivity.actividadesOBs = actividadesOBs;
+    public static void setActivitiesOBs(List<Activity> activitiesOBs) {
+        MainActivity.activitiesOBs = activitiesOBs;
     }
 
-    public static List<Rutina> getRutinasOBs() {
-        return rutinasOBs;
+    public static List<Routine> getRoutinsOBs() {
+        return routinesOBs;
     }
 
-    public static void setRutinasOBs(List<Rutina> rutinasOBs) {
-        MainActivity.rutinasOBs = rutinasOBs;
+    public static void setRoutinsOBs(List<Routine> routinesOBs) {
+        MainActivity.routinesOBs = routinesOBs;
     }
 
-    public static Boolean getConfirmado() {
-        return confirmado;
+    public static Boolean getConfirmed() {
+        return confirmed;
     }
 
-    public static void setConfirmado(Boolean confirmado) {
-        MainActivity.confirmado = confirmado;
+    public static void setConfirme(Boolean confirmed) {
+        MainActivity.confirmed = confirmed;
     }
 
     public ActivityMainBinding getBinding() {

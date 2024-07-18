@@ -1,19 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/SCREEN"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/fondo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editext"
+        android:layout_width="237dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/editext2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.934"
+        android:textColorHint="@color/ic_launcher_background"
+        app:hintTextColor="@android:color/holo_blue_dark"
+        app:boxBackgroundMode="none"
+        android:backgroundTint="#CCCCCC"
+        android:background="@drawable/editext"
+        android:hint="Nombre">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombre"
+            android:text="admin"
+            android:layout_width="match_parent"
+            android:paddingTop="8dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editext2"
+        android:layout_width="237dp"
+        android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.559"
+        android:textColorHint="@color/ic_launcher_background"
+        app:hintTextColor="@android:color/holo_blue_dark"
+        app:boxBackgroundMode="none"
+        android:backgroundTint="#CCCCCC"
+        android:background="@drawable/editext"
+        android:hint="Clave">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/clave"
+            android:text="admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:inputType="textPassword"
+            android:textSize="18dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        style="@style/BUTTON"
+        android:layout_width="237dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:text="Entrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.724" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ActivitiesDetailsFragment">
+    android:orientation="vertical"
+    tools:context=".activities.ActivitiesDetailsFragment"
+    style="@style/SCREEN">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-</FrameLayout>
+            <ImageView
+                android:id="@+id/activityImg"
+                android:layout_width="match_parent"
+                android:layout_height="236dp"
+                android:src="@drawable/actividad_ejercicio_r" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activityName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NombreActividad"
+                    android:textAlignment="center"
+                    android:textColor="#252525"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descripción: "
+                    android:textColor="#252525"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/activityDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#252525"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Profesor: "
+                    android:textColor="#252525"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/activityTeacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#252525"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vacnates: "
+                    android:textColor="#252525"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/activityVacancies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#252525"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Horarios: "
+                    android:textColor="#252525"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/activitySchedules"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#252525"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio: "
+                    android:textColor="#252525"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/activityPrices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textColor="#252525"
+                    android:textSize="20dp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/monday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="MON"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tuesday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="TUE"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/wednesday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="WED"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@id/thursday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="THU"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/friday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="FRY"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/saturday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="SAT"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sunday"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:paddingLeft="10dp"
+                        android:text="SUN"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/reserve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:text="Reservar"
+                    android:textAllCaps="false"
+                    style="@style/BUTTON"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/deleteReservation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:text="Eliminar Reserva"
+                    android:textAllCaps="false"
+                    style="@style/BUTTON"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
