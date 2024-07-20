@@ -6,52 +6,52 @@ import java.util.Map;
 
 public class Weight {
     //ATRIBUTOS
-    List<Map<String, String>> datosPeso;
-    List<String> fecha;
-    String objetivo;
+    List<Map<String, String>> weightData;
+    List<String> date;
+    String target;
     //CONSTRUCTOR
-    public Peso(){
-        this.datosPeso = new ArrayList<>();
-        this.fecha = new ArrayList<>();
+    public Weight(){
+        this.weightData = new ArrayList<>();
+        this.date = new ArrayList<>();
     }
-    public Peso(List<Map<String, String>>  datosPeso, List<String> fecha, String objetivo){
-        this.datosPeso = datosPeso;
-        this.fecha = fecha;
-        this.objetivo = objetivo;
+    public Weight(List<Map<String, String>>  weightData, List<String> date, String target){
+        this.weightData = weightData;
+        this.date = date;
+        this.target = target;
     }
 
 //GETTERS Y SETTERS
 
-    public String getObjetivo() {
-        return objetivo;
+    public List<Map<String, String>> getWeightData() {
+        return weightData;
     }
 
-    public void setObjetivo(String objetivo) {
-        this.objetivo = objetivo;
+    public void setWeightData(List<Map<String, String>> weightData) {
+        this.weightData = weightData;
     }
 
-    public List<String> getFecha() {
-        return fecha;
+    public List<String> getDate() {
+        return date;
     }
 
-    public void setFecha(List<String> fecha) {
-        this.fecha = fecha;
+    public void setDate(List<String> date) {
+        this.date = date;
     }
 
-    public List<Map<String, String>>  getDatosPeso() {
-        return datosPeso;
+    public String getTarget() {
+        return target;
     }
 
-    public void setDatosPeso(List<Map<String, String>>  datosPeso) {
-        this.datosPeso = datosPeso;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     @Override
     public String toString() {
-        return "Peso{" +
-                "datosPeso=" + datosPeso +
-                ", fecha='" + fecha + '\'' +
-                ", objetivo=" + objetivo +
+        return "Weight{" +
+                "weightData=" + weightData +
+                ", date=" + date +
+                ", target='" + target + '\'' +
                 '}';
     }
 }

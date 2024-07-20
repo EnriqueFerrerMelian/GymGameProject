@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:id="@+id/peso"
+        android:id="@+id/weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/peso"
+            android:text="Weight"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -37,7 +37,7 @@
             android:textAlignment="center">
 
             <NumberPicker
-                android:id="@+id/numberPeso"
+                android:id="@+id/numberWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -49,7 +49,7 @@
                 android:textSize="24sp" />
 
             <NumberPicker
-                android:id="@+id/numberPesoDecimal"
+                android:id="@+id/numberDecimalWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -63,7 +63,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/objetivo"
+        android:id="@+id/target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -90,7 +90,7 @@
             android:textAlignment="center">
 
             <NumberPicker
-                android:id="@+id/numberPesoOb"
+                android:id="@+id/numberObWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -102,7 +102,7 @@
                 android:textSize="24sp" />
 
             <NumberPicker
-                android:id="@+id/numberPesoDecimalOb"
+                android:id="@+id/numberDecimalObWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -118,7 +118,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/objetivo"
+        android:layout_below="@+id/target"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="3dp"

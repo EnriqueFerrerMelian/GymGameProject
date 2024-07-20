@@ -79,4 +79,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    //Back4App
+    implementation ("com.github.parse-community.Parse-SDK-Android:parse:4.3.0")
 }

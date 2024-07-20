@@ -19,7 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+import com.example.gymgameproject.MainActivity;
+import com.example.gymgameproject.MenuPrincipal;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Advance;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.classes.Weight;
+import com.example.gymgameproject.databinding.FragmentStadisticsBinding;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,27 +37,27 @@ import com.example.gymgameproject.R;
  * create an instance of this fragment.
  */
 public class StadisticsFragment extends Fragment {
-    private static FragmentEstadisticasBinding binding;
+    private static FragmentStadisticsBinding binding;
     private static Entry pesoSeleccionado = new Entry();
     private static BarEntry progresoSeleccionado = new BarEntry(0,0);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentEstadisticasBinding.inflate(inflater, container, false);
+        binding = FragmentStadisticsBinding.inflate(inflater, container, false);
         AppHelper.cambiarToolbarText("Estadísticas");
         ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return binding.getRoot();
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if(MainActivity.getPesoOB()==null){
-            MainActivity.setPesoOB(new Peso());
+        if(MainActivity.getWeightOB()==null){
+            MainActivity.setWeightOB(new Weight());
         }else{
             binding.textoInfo.setVisibility(View.GONE);
         }
-        if(MainActivity.getAvanceOB()==null){
-            MainActivity.setAvanceOB(new Avance());
+        if(MainActivity.getAdvanceOB()==null){
+            MainActivity.setAdvanceOB(new Advance());
         }
         AppHelper.configurarChartPeso(binding);
         AppHelper.configurarChartAvance(binding);
@@ -104,13 +114,13 @@ public class StadisticsFragment extends Fragment {
     public void showBottonSheetPeso(boolean status){
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_bottom_sheet_add_peso);
-        LinearLayout peso = dialog.findViewById(R.id.peso);
-        LinearLayout objetivo = dialog.findViewById(R.id.objetivo);
-        NumberPicker numberPeso = dialog.findViewById(R.id.numberPeso);
-        NumberPicker numberPesoDecimal = dialog.findViewById(R.id.numberPesoDecimal);
-        NumberPicker numberPesoOb = dialog.findViewById(R.id.numberPesoOb);
-        NumberPicker numberPesoDecimalOb = dialog.findViewById(R.id.numberPesoDecimalOb);
+        dialog.setContentView(R.layout.my_bottom_sheet_add_weight);
+        LinearLayout peso = dialog.findViewById(R.id.weight);
+        LinearLayout objetivo = dialog.findViewById(R.id.target);
+        NumberPicker numberPeso = dialog.findViewById(R.id.numberWeight);
+        NumberPicker numberPesoDecimal = dialog.findViewById(R.id.numberDecimalWeight);
+        NumberPicker numberPesoOb = dialog.findViewById(R.id.numberObWeight);
+        NumberPicker numberPesoDecimalOb = dialog.findViewById(R.id.numberDecimalObWeight);
         Button add = dialog.findViewById(R.id.add);
         Button cancel = dialog.findViewById(R.id.cancel);
         //inicialización de numberPicker**************************
@@ -119,8 +129,8 @@ public class StadisticsFragment extends Fragment {
             objetivo.setVisibility(View.INVISIBLE);
             numberPeso.setMinValue(1);numberPeso.setMaxValue(150);
             numberPesoDecimal.setMinValue(0);numberPesoDecimal.setMaxValue(9);
-            if(MainActivity.getPesoOB().getDatosPeso().size()>0){
-                String[] objetivoArray = MainActivity.getPesoOB().getDatosPeso().get(MainActivity.getPesoOB().getDatosPeso().size()-1).get("y").split("\\.");
+            if(!MainActivity.getWeightOB().getWeightData().isEmpty()){
+                String[] objetivoArray = MainActivity.getWeightOB().getWeightData().get(MainActivity.getWeightOB().getWeightData().size()-1).get("y").split("\\.");
                 numberPeso.setValue(Integer.valueOf(objetivoArray[0]));
                 numberPesoDecimal.setValue(Integer.valueOf(objetivoArray[1]));
             }
@@ -129,8 +139,8 @@ public class StadisticsFragment extends Fragment {
             objetivo.setVisibility(View.VISIBLE);
             numberPesoOb.setMinValue(0);numberPesoOb.setMaxValue(150);
             numberPesoDecimalOb.setMinValue(0);numberPesoDecimalOb.setMaxValue(9);
-            if(MainActivity.getPesoOB().getObjetivo()!=null){
-                String[] objetivoArray = MainActivity.getPesoOB().getObjetivo().split("\\.");
+            if(MainActivity.getWeightOB().getTarget()!=null){
+                String[] objetivoArray = MainActivity.getWeightOB().getTarget().split("\\.");
                 numberPesoOb.setValue(Integer.valueOf(objetivoArray[0]));
                 numberPesoDecimalOb.setValue(Integer.valueOf(objetivoArray[1]));
             }
@@ -140,10 +150,10 @@ public class StadisticsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(status){
-                    String pesoOut = numberPeso.getValue() +"." + numberPesoDecimal.getValue();
-                    AppHelper.actualizarPeso(AppHelper.addDatosPeso(pesoOut));
+                    String outputWeight = numberWeight.getValue() +"." + numberDecimalWeight.getValue();
+                    AppHelper.actualizarPeso(AppHelper.addDatosPeso(outputWeight));
                 }else{
-                    String objetivoOut = numberPesoOb.getValue() +"." + numberPesoDecimalOb.getValue();
+                    String objetivoOut = numberObWeight.getValue() +"." + numberDecimalObWeight.getValue();
                     AppHelper.actualizarPeso(AppHelper.addDatosObjetivo(objetivoOut));
                 }
                 dialog.dismiss();
@@ -221,7 +231,7 @@ public class StadisticsFragment extends Fragment {
     /**
      * @return El objeto binding del fragmento.
      */
-    public static FragmentEstadisticasBinding getBinding(){
-        return EstadisticasFragment.binding;
+    public static FragmentStadisticsBinding getBinding(){
+        return StadisticsFragment.binding;
     }
 }

@@ -3,6 +3,7 @@ package com.example.gymgameproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ParseObject firstObject = new  ParseObject("FirstClass");
+        firstObject.put("message","Hey ! First message from android. Parse is now connected");
+        firstObject.saveInBackground(e -> {
+            if (e != null){
+                Log.e("MainActivity", e.getLocalizedMessage());
+                    }else{
+                    Log.d("MainActivity","Object saved.");
+                }
+            });
+        }
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         validarFechaActividad(this);

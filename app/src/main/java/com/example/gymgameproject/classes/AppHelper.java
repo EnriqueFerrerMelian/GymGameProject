@@ -18,6 +18,24 @@ import com.bumptech.glide.Glide;
 import com.example.gymgameproject.MainActivity;
 import com.example.gymgameproject.R;
 import com.example.gymgameproject.databinding.FragmentActivitiesDetailsBinding;
+import com.example.gymgameproject.databinding.FragmentStadisticsBinding;
+import com.example.gymgameproject.fragments.StadisticsFragment;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
@@ -90,7 +108,7 @@ public class AppHelper {
      * @param peso Peso seleccionado, transformado en string.
      * @return Objeto Peso con los datos actualizados
      */
-    public static Peso addDatosPeso(String peso){
+    public static Weight addDatosPeso(String peso){
         //Obtengo la fecha de hoy
         Calendar cal = new GregorianCalendar();
         Date date = cal.getTime();
@@ -98,22 +116,22 @@ public class AppHelper {
 
         //creo un mapa que guarde los ejes
         Map<String, String> datosPeso = new HashMap<>();
-        datosPeso.put("x", String.valueOf(MainActivity.getPesoOB().getDatosPeso().size()+1));
+        datosPeso.put("x", String.valueOf(MainActivity.getWeightOB().getWeightData().size()+1));
         datosPeso.put("y", peso);
-        MainActivity.getPesoOB().getFecha().add(fecha);
-        MainActivity.getPesoOB().getDatosPeso().add(datosPeso);
+        MainActivity.getWeightOB().getDate().add(fecha);
+        MainActivity.getWeightOB().getWeightData().add(datosPeso);
 
-        return MainActivity.getPesoOB();
+        return MainActivity.getWeightOB();
     }
-    public static Peso addDatosObjetivo(String objetivo){
-        MainActivity.getPesoOB().setObjetivo(objetivo);
-        return MainActivity.getPesoOB();
+    public static Weight addDatosObjetivo(String target){
+        MainActivity.getWeightOB().setTarget(target);
+        return MainActivity.getWeightOB();
     }
 
     /**
      * Configura la apariencia por defecto del chart y carga los datos del objeto Peso
      */
-    public static void configurarChartPeso(FragmentEstadisticasBinding binding){
+    public static void configurarChartPeso(FragmentStadisticsBinding binding){
         float maxView = 0;float minView = 0;
 
         //borrando bordes
@@ -152,19 +170,19 @@ public class AppHelper {
         //insertando fechas en eje X
         XAxis xAxis = binding.lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        final List<String> fechas = MainActivity.getPesoOB().getFecha();
+        final List<String> fechas = MainActivity.getWeightOB().getDate();
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(fechas));
 
         //inserción de entradas
         List<Entry> entries = new ArrayList<>();
-        for (int i = 0; i < MainActivity.getPesoOB().getDatosPeso().size(); i++) {
-            entries.add(new Entry((float) i,Float.parseFloat(Objects.requireNonNull(MainActivity.getPesoOB().getDatosPeso().get(i).get("y")))));
-            if(Float.parseFloat(Objects.requireNonNull(MainActivity.getPesoOB().getDatosPeso().get(i).get("y")))>maxView){
-                maxView = Float.parseFloat(Objects.requireNonNull(MainActivity.getPesoOB().getDatosPeso().get(i).get("y")));
+        for (int i = 0; i < MainActivity.getWeightOB().getWeightData().size(); i++) {
+            entries.add(new Entry((float) i,Float.parseFloat(Objects.requireNonNull(MainActivity.getWeightOB().getWeightData().get(i).get("y")))));
+            if(Float.parseFloat(Objects.requireNonNull(MainActivity.getWeightOB().getWeightData().get(i).get("y")))>maxView){
+                maxView = Float.parseFloat(Objects.requireNonNull(MainActivity.getWeightOB().getWeightData().get(i).get("y")));
             }
-            if(Float.parseFloat(Objects.requireNonNull(MainActivity.getPesoOB().getDatosPeso().get(i).get("y")))<minView){
-                minView = Float.parseFloat(Objects.requireNonNull(MainActivity.getPesoOB().getDatosPeso().get(i).get("y")));
+            if(Float.parseFloat(Objects.requireNonNull(MainActivity.getWeightOB().getWeightData().get(i).get("y")))<minView){
+                minView = Float.parseFloat(Objects.requireNonNull(MainActivity.getWeightOB().getWeightData().get(i).get("y")));
             }
         }
         LineDataSet lineDataSet = new LineDataSet(entries, "Peso");
@@ -176,15 +194,15 @@ public class AppHelper {
         lineDataSet.setValueTextSize(15);
         lineDataSet.setLineWidth(3);
         LineData lineData = new LineData(lineDataSet);
-        if(MainActivity.getPesoOB().getDatosPeso().size()>0){
-            binding.ultimoPeso.setText(MainActivity.getPesoOB().getDatosPeso().get(MainActivity.getPesoOB().getDatosPeso().size()-1).get("y") + " Kgs");
+        if(MainActivity.getWeightOB().getWeightData().size()>0){
+            binding.ultimoPeso.setText(MainActivity.getWeightOB().getWeightData().get(MainActivity.getWeightOB().getWeightData().size()-1).get("y") + " Kgs");
         }
         //>>>****INSERCIÓN DE DATOS*****FIN
 
         //si se ha seleccionado una marca de objetivo
-        if(MainActivity.getPesoOB().getObjetivo()!=null){
-            if(Float.parseFloat(MainActivity.getPesoOB().getObjetivo())>0){
-                float leyendVal =Float.parseFloat(MainActivity.getPesoOB().getObjetivo());
+        if(MainActivity.getWeightOB().getTarget()!=null){
+            if(Float.parseFloat(MainActivity.getWeightOB().getTarget())>0){
+                float leyendVal =Float.parseFloat(MainActivity.getWeightOB().getTarget());
                 YAxis yAxis = binding.lineChart.getAxisLeft();
                 LimitLine ll = new LimitLine(leyendVal, "");
                 ll.setLineColor(Color.rgb(255,135,0));
@@ -203,7 +221,7 @@ public class AppHelper {
         binding.lineChart.invalidate();
     }
 
-    public static void configurarChartAvance(FragmentEstadisticasBinding binding){
+    public static void configurarChartAvance(FragmentStadisticsBinding binding){
         //borrando bordes
         binding.barChart.setDrawBorders(false);
         binding.barChart.getAxisRight().setDrawLabels(false);
@@ -228,29 +246,29 @@ public class AppHelper {
         legendEntry[0] = lEntry1;
         l.setCustom(legendEntry);
 
-        //>>>****INSERCIÓN DE DATOS********
-        //insertando nombres en eje X
+        //>>>**** INPUT DATA ********
+        //inserting names on axe X
         XAxis xAxis = binding.barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(recortarNombres(MainActivity.getAvanceOB().getEjerciciosNombres())));
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(recortarNombres(MainActivity.getAdvanceOB().getExercisesName())));
 
-        //inserción de entradas
+        //inserting entries
         List<BarEntry> entries = new ArrayList<>();
 
-        for (int i = 0; i < MainActivity.getAvanceOB().getPesos().size(); i++) {//pesos de los ejercicios, array de Strings
-            entries.add(new BarEntry(Float.valueOf(i),Float.valueOf(MainActivity.getAvanceOB().getPesos().get(i))));
+        for (int i = 0; i < MainActivity.getAdvanceOB().getWeights().size(); i++) {//exercises weights, string array
+            entries.add(new BarEntry(Float.valueOf(i),Float.valueOf(MainActivity.getAdvanceOB().getWeights().get(i))));
         }
 
         BarDataSet barDataSet = new BarDataSet(entries, "Avance");
         barDataSet.setColor(Color.rgb(255,127,39));
         barDataSet.setValueTextSize(15);
         BarData barData = new BarData(barDataSet);
-        String ultimoValorIntroducido = MainActivity.getAvanceOB().getEjerciciosNombres()
-                .isEmpty() ? " " : MainActivity.getAvanceOB()
-                .getEjerciciosNombres().get(MainActivity.getAvanceOB().getEjerciciosNombres().size()-1);
-        binding.ultimoProgreso.setText(ultimoValorIntroducido);
-        //>>>****INSERCIÓN DE DATOS*****fin
+        String lastInputValue = MainActivity.getAdvanceOB().getExercisesName()
+                .isEmpty() ? " " : MainActivity.getAdvanceOB()
+                .getExercisesName().get(MainActivity.getAdvanceOB().getExercisesName().size()-1);
+        binding.ultimoProgreso.setText(lastInputValue);
+        //>>>**** INPUT DATA *****end
         binding.barChart.canScrollHorizontally(1);
 
         binding.barChart.setNoDataText("No se ha guardado ningún dato.");
@@ -260,43 +278,43 @@ public class AppHelper {
         binding.barChart.setVisibleXRangeMaximum(5);
     }
 
-    public static void actualizarAvance(Avance avance){
+    public static void actualizarAvance(Advance advance){
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/avance");
-        ref.setValue(avance).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .getReference("usuarios/"+ MainActivity.getUserOB().getId()+"/avance");
+        ref.setValue(advance).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 actualizarApp();
-                configurarChartAvance(EstadisticasFragment.getBinding());
+                configurarChartAvance(StadisticsFragment.getBinding());
             }
         });
     }
     /**
      * Actualiza los datos del peso del usuario en Firebase.
-     * @param peso
+     * @param weight
      */
-    public static void actualizarPeso(Peso peso){
+    public static void actualizarPeso(Weight weight){
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/peso");
-        ref.setValue(peso).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .getReference("usuarios/"+ MainActivity.getUserOB().getId()+"/peso");
+        ref.setValue(weight).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 actualizarApp();
-                configurarChartPeso(EstadisticasFragment.getBinding());
+                configurarChartPeso(StadisticsFragment.getBinding());
             }
         });
     }
-    public static void actualizarObjetivo(Peso peso){
+    public static void actualizarObjetivo(Weight weight){
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/peso");
-        ref.setValue(peso).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .getReference("usuarios/"+ MainActivity.getUserOB().getId()+"/peso");
+        ref.setValue(weight).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 actualizarApp();
-                configurarChartPeso(EstadisticasFragment.getBinding());
+                configurarChartPeso(StadisticsFragment.getBinding());
             }
         });
     }
@@ -372,7 +390,7 @@ public class AppHelper {
             @Override
             public void onSuccess(Void unused) {
                 escribirToast("Actividad reservada", context);
-                actualizarVacante(activity);
+                updateVacancy(activity);
             }
         });
     }
@@ -381,7 +399,7 @@ public class AppHelper {
         activity.setVacancies(String.valueOf(vacancies));
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+ MainActivity.getUsuarioOB().getId()+"/actividades/"+activity.getName());
+                .getReference("usuarios/"+ MainActivity.getUserOB().getId()+"/actividades/"+activity.getName());
         ref.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -505,16 +523,16 @@ public class AppHelper {
     }
     public static void configurarArr(Calendar calendar){
         List<String> listaDiasSemanas = listaDeDiasPorSemanas(calendar);
-        for (int i = 0; i < MainActivity.getRutinasOBs().size(); i++) {
+        for (int i = 0; i < MainActivity.getRoutinsOBs().size(); i++) {
             for (int j = 0; j < listaDiasSemanas.size(); j++) {
-                if(MainActivity.getRutinasOBs().get(i).getDias().contains(listaDiasSemanas.get(j))){
+                if(MainActivity.getRoutinsOBs().get(i).getDias().contains(listaDiasSemanas.get(j))){
                     arr[0].put(j+1, "rutina");
                 }
             }
         }
-        for (int i = 0; i < MainActivity.getActividadesOBs().size(); i++) {
+        for (int i = 0; i < MainActivity.getActivitiesOBs().size(); i++) {
             for (int j = 0; j < listaDiasSemanas.size(); j++) {
-                if(MainActivity.getActividadesOBs().get(i).getDias().contains(listaDiasSemanas.get(j))){
+                if(MainActivity.getActivitiesOBs().get(i).getDays().contains(listaDiasSemanas.get(j))){
                     if(arr[0].containsKey(j+1)){
                         arr[0].put(j+1, "mix");
                     }else{

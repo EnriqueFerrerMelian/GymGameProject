@@ -5,45 +5,44 @@ import java.util.List;
 
 public class Advance {
     //ATRIBUTOS
-    List<String> ejerciciosNombres;
-    List<String> pesos;
+    List<String> exercisesName;
+    List<String> weights;
 //CONSTRUCTOR
 
-    public Avance() {
-        this.ejerciciosNombres = new ArrayList<>();
-        this.pesos = new ArrayList<>();
+    public Advance() {
+        this.exercisesName = new ArrayList<>();
+        this.weights = new ArrayList<>();
     }
 
-    public Avance(List<String> ejerciciosNombres, List<String> pesos) {
-        this.ejerciciosNombres = ejerciciosNombres;
-        this.pesos = pesos;
+    public Advance(List<String> exercisesName, List<String> weights) {
+        this.exercisesName = exercisesName;
+        this.weights = weights;
     }
 
 
 //GETTERS Y SETTERS
 
-
-    public List<String> getEjerciciosNombres() {
-        return ejerciciosNombres;
+    public List<String> getExercisesName() {
+        return exercisesName;
     }
 
-    public void setEjerciciosNombres(List<String> ejerciciosNombres) {
-        this.ejerciciosNombres = ejerciciosNombres;
+    public void setExercisesName(List<String> exercisesName) {
+        this.exercisesName = exercisesName;
     }
 
-    public List<String> getPesos() {
-        return pesos;
+    public List<String> getWeights() {
+        return weights;
     }
 
-    public void setPesos(List<String> pesos) {
-        this.pesos = pesos;
+    public void setWeights(List<String> weights) {
+        this.weights = weights;
     }
 
     @Override
     public String toString() {
-        return "Avance{" +
-                "ejerciciosNombres=" + ejerciciosNombres +
-                ", pesos=" + pesos +
+        return "Advance{" +
+                "exercisesName=" + exercisesName +
+                ", weights=" + weights +
                 '}';
     }
 }

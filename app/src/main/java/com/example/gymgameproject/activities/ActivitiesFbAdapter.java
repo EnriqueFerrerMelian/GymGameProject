@@ -27,7 +27,7 @@ public class ActivitiesFbAdapter extends FirebaseRecyclerAdapter<Activity, Activ
      *
      * @param options
      */
-    public ActividadFbAdapter(@NonNull FirebaseRecyclerOptions<Activity> options, ItemClickListener clickListener) {
+    public ActivitiesFbAdapter(@NonNull FirebaseRecyclerOptions<Activity> options, ItemClickListener clickListener) {
         super(options);
         this.clickListener = clickListener;
     }
