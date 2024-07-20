@@ -1,34 +1,25 @@
-# Utiliza una imagen base oficial de Java, necesaria para Android SDK
+# Use the official OpenJDK 11 image from the Docker Hub
 FROM openjdk:11
 
-# Configura las variables de entorno necesarias para el SDK de Android
+# Set the Android SDK home directory
 ENV ANDROID_HOME /opt/android-sdk-linux
+
+# Add Android SDK tools and platform-tools to the PATH
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
-# Instala dependencias necesarias
+# Install essential packages
 RUN apt-get update && apt-get install -y wget unzip
 
-# Descarga y descomprime el SDK de Android
+# Download and install the Android command-line tools
 RUN wget -q "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip" -O android-sdk.zip && \
-    mkdir -p ${ANDROID_HOME}/cmdline-tools && \
-    unzip -q android-sdk.zip -d ${ANDROID_HOME}/cmdline-tools && \
+    mkdir -p ${ANDROID_HOME}/cmdline-tools/latest && \
+    unzip -q android-sdk.zip -d ${ANDROID_HOME}/cmdline-tools/latest && \
     rm android-sdk.zip
 
-# Acepta las licencias de SDK
-RUN mkdir -p ~/.android/ && echo '### User Agreements' > ~/.android/repositories.cfg && \
-    yes | ${ANDROID_HOME}/cmdline-tools/bin/sdkmanager --licenses
+# The previous commands created the cmdline-tools directory but placed the tools in a 'cmdline-tools/latest' subdirectory.
+# We need to ensure that sdkmanager and other tools are directly accessible.
 
-# Instala las plataformas y herramientas necesarias
-RUN ${ANDROID_HOME}/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+# Accept Android SDK licenses
+RUN mkdir -p ~/.android/ && echo '### User Agreements' > ~/.android/repositories.cfg && yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
 
-# Establece el directorio de trabajo
-WORKDIR /app
-
-# Copia el código fuente de la aplicación en el contenedor
-COPY . .
-
-# Comando para construir la aplicación (ajusta según tu proyecto)
-RUN ./gradlew assembleDebug
-
-# Configura el comando por defecto
-CMD ["./gradlew", "assembleDebug"]
+# Note: By specifying 'cmdline-tools/latest/bin/sdkmanager', we ensure that the correct path is used.
