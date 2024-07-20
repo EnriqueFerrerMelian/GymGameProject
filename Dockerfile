@@ -11,8 +11,12 @@ RUN apt-get update && apt-get install -y wget unzip
 # Download and install the Android SDK command-line tools
 RUN wget -q "https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip" -O android-sdk.zip && \
     mkdir -p ${ANDROID_HOME}/cmdline-tools/tools && \
-    unzip -q android-sdk.zip -d ${ANDROID_HOME}/cmdline-tools && \
+    unzip -q android-sdk.zip -d ${ANDROID_HOME}/cmdline-tools/tools && \
     rm android-sdk.zip
+
+# Verify the contents of the cmdline-tools directory
+RUN ls -la ${ANDROID_HOME}/cmdline-tools/tools
+RUN ls -la ${ANDROID_HOME}/cmdline-tools/tools/bin
 
 # Verify that the downloaded files have the correct permissions to execute sdkmanager
 RUN chmod +x ${ANDROID_HOME}/cmdline-tools/tools/bin/sdkmanager
@@ -23,4 +27,4 @@ RUN mkdir -p ~/.android/ && echo '### User Agreements' > ~/.android/repositories
 # Note:
 # - The tools are placed under `cmdline-tools/tools`.
 # - The PATH is updated to reflect the correct location for `sdkmanager`.
-# - File permissions for `sdkmanager` are explicitly set to ensure it is executable.
+# - Intermediate steps to list directory contents and verify installation.
