@@ -22,10 +22,11 @@ RUN sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-30
 
 # Copy your Android project into the Docker image
 # Change 'your-android-project' to the path of your project directory
-COPY GymGameProject/
+COPY GymGameProject/root/project
 
 # Set the working directory
-WORKDIR GymGameProject\app
+WORKDIR /root/project
+
 
 # Gradle wrapper usage; you might want to replace this with your specific build command if different.
 RUN ./gradlew build
