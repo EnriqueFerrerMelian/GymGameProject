@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.gymgameproject"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -80,6 +80,4 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Back4App
-    implementation ("com.github.parse-community.Parse-SDK-Android:parse:4.3.0")
 }

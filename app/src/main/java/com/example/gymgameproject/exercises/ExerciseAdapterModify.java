@@ -11,32 +11,38 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Exercise;
+import com.example.gymgameproject.classes.Routine;
+import com.example.gymgameproject.routines.RoutineCreationFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseAdapterModify extends RecyclerView.Adapter<EjercicioAdapterModificar.ViewHolder>{
-    private static List<Ejercicio> dataArrayList = new ArrayList<Ejercicio>();
+public class ExerciseAdapterModify extends RecyclerView.Adapter<ExerciseAdapterModify.ViewHolder>{
+    private static List<Exercise> dataArrayList = new ArrayList<Exercise>();
     private ViewHolder.ItemClickListener clickListener;
-    private static Rutina rutina;
+    private static Routine routine;
 
 
-    public EjercicioAdapterModificar(List<Ejercicio> dataArrayList, ViewHolder.ItemClickListener clickListener, Rutina rutina) {
+    public ExerciseAdapterModify(List<Exercise> dataArrayList, ViewHolder.ItemClickListener clickListener, Routine routine) {
         this.dataArrayList = dataArrayList;
         this.clickListener = clickListener;
-        this.rutina = rutina;
+        this.routine = routine;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ejercicio_modificar, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise_modify, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bind(dataArrayList.get(position));
-        holder.idEjercicio = dataArrayList.get(position).getId();
+        holder.idExercise = dataArrayList.get(position).getId();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +61,7 @@ public class ExerciseAdapterModify extends RecyclerView.Adapter<EjercicioAdapter
         //declaración de variables
         TextView nombre;
         ImageView imagen;
-        ImageButton borrar;int idEjercicio;
+        ImageButton borrar;int idExercise;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,15 +71,15 @@ public class ExerciseAdapterModify extends RecyclerView.Adapter<EjercicioAdapter
             borrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CreacionRutinaFragment.eliminarEjercicio(idEjercicio);
+                    RoutineCreationFragment.removeExercise(idExercise);
                 }
             });
         }
 
-        public void bind(Ejercicio ejercicio) {
-            nombre.setText(ejercicio.getNombre());
+        public void bind(Exercise exercise) {
+            nombre.setText(exercise.getName());
             Glide.with(imagen.getContext())
-                    .load(ejercicio.getImg())
+                    .load(exercise.getImage())
                     .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                     .circleCrop()
                     .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
@@ -82,7 +88,7 @@ public class ExerciseAdapterModify extends RecyclerView.Adapter<EjercicioAdapter
         }
 
         public interface ItemClickListener{
-            public void onItemClick(Ejercicio ejercicio);
+            public void onItemClick(Exercise exercise);
         }
     }
 

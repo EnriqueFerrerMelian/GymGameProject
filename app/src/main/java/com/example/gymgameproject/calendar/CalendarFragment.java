@@ -12,30 +12,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.classes.Event;
+import com.example.gymgameproject.databinding.FragmentCalendarBinding;
+
+import org.naishadhparmar.zcustomcalendar.CustomCalendar;
+import org.naishadhparmar.zcustomcalendar.OnNavigationButtonClickedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CalendarFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CalendarFragment extends Fragment implements OnNavigationButtonClickedListener {
-    private FragmentCalendarioBinding binding;
+    private FragmentCalendarBinding binding;
     private CustomCalendar customCalendar;
-    private static ObjetoAdapter eventoAdapter;
-    private static List<Evento> eventos = new ArrayList<>();
+    private static ObjectAdapter eventoAdapter;
+    private static List<Event> eventos = new ArrayList<>();
     private static RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentCalendarioBinding.inflate(inflater, container, false);
+        binding = FragmentCalendarBinding.inflate(inflater, container, false);
         AppHelper.cambiarToolbarText("Calendario");
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return binding.getRoot();
     }
 
@@ -45,7 +48,7 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
         AppHelper.cargarCalendario(customCalendar, getContext(), this);
         //recycler
         recyclerView = binding.recyclerViewRutina;
-        eventoAdapter = new ObjetoAdapter(eventos);
+        eventoAdapter = new ObjectAdapter(eventos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(eventoAdapter);
         //despliega en la lista los eventos del día actual, si los hay
@@ -60,8 +63,8 @@ public class CalendarFragment extends Fragment implements OnNavigationButtonClic
         Map<Integer, Object>[] arr = AppHelper.getArr();
         return arr;
     }
-    public static void setRecyclerView(List<Evento> eventoList){
-        eventoAdapter = new ObjetoAdapter(eventoList);
+    public static void setRecyclerView(List<Event> eventoList){
+        eventoAdapter = new ObjectAdapter(eventoList);
         recyclerView.setAdapter(eventoAdapter);
     }
 }

@@ -3,44 +3,20 @@ package com.example.gymgameproject.classes;
 public class Exercise {
     //ATRIBUTOS
     int id;
-    String nombre, musculos, descripcion, categoria, peso, repecitionesYseries, img, tiempo;
+    String name, muscle, description, category, weight, repetitionsAndSeries, image, time;
 
 
     //CONSTRUCTOR
-    public Ejercicio(int id, String nombre, String musculos, String descripcion, String categoria, String img) {
+    public Exercise(int id, String name, String muscle, String description, String category, String image) {
         this.id = id;
-        this.nombre = nombre;
-        this.musculos = musculos;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.img = img;
+        this.name = name;
+        this.muscle = muscle;
+        this.description = description;
+        this.category = category;
+        this.image = image;
     }
 
-    public Ejercicio(){ }
-
-    public String getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
-    }
-
-    public String getPeso() {
-        return peso;
-    }
-
-    public void setPeso(String peso) {
-        this.peso = peso;
-    }
-
-    public String getRepecitionesYseries() {
-        return repecitionesYseries;
-    }
-
-    public void setRepecitionesYseries(String repecitionesYseries) {
-        this.repecitionesYseries = repecitionesYseries;
-    }
+    public Exercise(){ }
 
     public int getId() {
         return id;
@@ -50,56 +26,82 @@ public class Exercise {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getMuscle() {
+        return muscle;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setMuscle(String muscle) {
+        this.muscle = muscle;
     }
 
-    public String getMusculos() {
-        return musculos;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMusculos(String musculos) {
-        this.musculos = musculos;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getImg() {
-        return img;
+    public String getWeight() {
+        return weight;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getRepetitionsAndSeries() {
+        return repetitionsAndSeries;
+    }
+
+    public void setRepetitionsAndSeries(String repetitionsAndSeries) {
+        this.repetitionsAndSeries = repetitionsAndSeries;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "Ejercicio{" +
+        return "Exercise{" +
                 "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", musculos='" + musculos + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", img='" + img + '\'' +
+                ", name='" + name + '\'' +
+                ", muscle='" + muscle + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", weight='" + weight + '\'' +
+                ", repetitionsAndSeries='" + repetitionsAndSeries + '\'' +
+                ", image='" + image + '\'' +
+                ", time='" + time + '\'' +
                 '}';
     }
 }

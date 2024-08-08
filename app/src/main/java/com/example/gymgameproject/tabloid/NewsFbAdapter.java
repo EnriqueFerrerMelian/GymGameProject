@@ -12,22 +12,28 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class NewsFbAdapter extends FirebaseRecyclerAdapter<Noticia, NoticiaFbAdapter.ViewHolder> {
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.News;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
 
-    private NoticiaFbAdapter.ItemClickListener clickListener;
-    public NoticiaFbAdapter(@NonNull FirebaseRecyclerOptions<Noticia> options, NoticiaFbAdapter.ItemClickListener clickListener) {
+public class NewsFbAdapter extends FirebaseRecyclerAdapter<News, NewsFbAdapter.ViewHolder> {
+
+    private NewsFbAdapter.ItemClickListener clickListener;
+    public NewsFbAdapter(@NonNull FirebaseRecyclerOptions<News> options, NewsFbAdapter.ItemClickListener clickListener) {
         super(options);
         this.clickListener = clickListener;
     }
     @NonNull
     @Override
-    public NoticiaFbAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_noticia, parent, false);
-        return new NoticiaFbAdapter.ViewHolder(view);
+    public NewsFbAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+        return new NewsFbAdapter.ViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Noticia model) {
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull News model) {
         holder.bind(model);
     }
 
@@ -48,7 +54,7 @@ public class NewsFbAdapter extends FirebaseRecyclerAdapter<Noticia, NoticiaFbAda
             return false;
         }
         @SuppressLint("ResourceAsColor")
-        public void bind(Noticia model){
+        public void bind(News model){
             titulo.setText(model.getTitulo());
             subhead.setText(model.getSubtitulo());
             if(model.getImagen()!=null){
@@ -68,6 +74,6 @@ public class NewsFbAdapter extends FirebaseRecyclerAdapter<Noticia, NoticiaFbAda
         }
     }
     public interface ItemClickListener{
-        public void onItemClick(Noticia noticia);
+        public void onItemClick(News noticia);
     }
 }

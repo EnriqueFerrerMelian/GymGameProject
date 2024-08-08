@@ -13,7 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Rutina, RutinaFbAdapter.ViewHolder> {
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.MainActivity;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Routine;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Routine, RoutineFbAdapter.ViewHolder> {
     private ItemClickListener clickListener;
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -21,7 +33,7 @@ public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Rutina, RutinaFbAd
      *
      * @param options
      */
-    public RutinaFbAdapter(@NonNull FirebaseRecyclerOptions<Rutina> options, ItemClickListener clickListener) {
+    public RoutineFbAdapter(@NonNull FirebaseRecyclerOptions<Routine> options, ItemClickListener clickListener) {
         super(options);
         this.clickListener = clickListener;
     }
@@ -37,37 +49,37 @@ public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Rutina, RutinaFbAd
      * @param model the model object containing the data that should be used to populate the view.
      */
     @Override
-    protected void onBindViewHolder(@NonNull RutinaFbAdapter.ViewHolder holder, int position, @NonNull Rutina model) {
-        holder.nombre.setText(model.getNombre());
+    protected void onBindViewHolder(@NonNull RoutineFbAdapter.ViewHolder holder, int position, @NonNull Routine model) {
+        holder.nombre.setText(model.getName());
         holder.rutinaId = model.getId();
-        if(model.getImg()!=null){
+        if(model.getImage()!=null){
             Glide.with(holder.imagen.getContext())
-                    .load(model.getImg())
+                    .load(model.getImage())
                     .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                     .circleCrop()
                     .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
                     .into(holder.imagen);
         }
-        for (int i = 0; i < model.getDias().size(); i++) {
-            if(model.getDias().get(i).equals("l")){
+        for (int i = 0; i < model.getDays().size(); i++) {
+            if(model.getDays().get(i).equals("l")){
                 holder.lunes.setTextColor(Color.rgb(255, 127, 39));
             }
-            if(model.getDias().get(i).equals("m")){
+            if(model.getDays().get(i).equals("m")){
                 holder.martes.setTextColor(Color.rgb(255, 127, 39));
             }
-            if(model.getDias().get(i).equals("x")){
+            if(model.getDays().get(i).equals("x")){
                 holder.miercoles.setTextColor(Color.rgb(255, 127, 39));
             }
-            if(model.getDias().get(i).equals("j")){
+            if(model.getDays().get(i).equals("j")){
                 holder.jueves.setTextColor(Color.rgb(255, 127, 39));
             }
-            if(model.getDias().get(i).equals("v")){
+            if(model.getDays().get(i).equals("v")){
                 holder.viernes.setTextColor(Color.rgb(255, 127, 39));
             }
-            if(model.getDias().get(i).equals("s")){
+            if(model.getDays().get(i).equals("s")){
                 holder.sabado.setTextColor(Color.rgb(255, 127, 39));
             }
-            if(model.getDias().get(i).equals("d")){
+            if(model.getDays().get(i).equals("d")){
                 holder.domingo.setTextColor(Color.rgb(255, 127, 39));
             }
         }
@@ -81,9 +93,9 @@ public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Rutina, RutinaFbAd
 
     @NonNull
     @Override
-    public RutinaFbAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rutina, parent, false);
-        return new RutinaFbAdapter.ViewHolder(view);//
+    public RoutineFbAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_routine, parent, false);
+        return new RoutineFbAdapter.ViewHolder(view);//
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
@@ -135,7 +147,7 @@ public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Rutina, RutinaFbAd
      */
     public void eliminarRutina(String id) {
         DatabaseReference ref2 = FirebaseDatabase.getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/" + MainActivity.getUsuarioOB().getId() + "/rutinas");
+                .getReference("usuarios/" + MainActivity.getUserOB().getId() + "/rutinas");
         ref2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -152,7 +164,7 @@ public class RoutineFbAdapter extends FirebaseRecyclerAdapter<Rutina, RutinaFbAd
         });
     }
     public interface ItemClickListener{
-        public void onItemClick(Rutina rutina);
+        public void onItemClick(Routine routine);
     }
 
 }

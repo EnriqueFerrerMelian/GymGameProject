@@ -1,50 +1,38 @@
 package com.example.gymgameproject.classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Routine {
     //ATRIBUTOS
-    String nombre, id, img, referencia;
-    List<String> dias;
-    List<Ejercicio> ejercicios;
+    String name, id, image, reference;
+    List<String> days;
+    List<Exercise> exercises;
 
 //CONSTRUCTOR
 
-    public Rutina(String id, String nombre, String img, List<Ejercicio> ejercicios, List<String> dias) {
+    public Routine(String id, String name, String image, List<Exercise> exercises, List<String> days) {
         this.id = id;
-        this.nombre = nombre;
-        this.img = img;
-        this.ejercicios = ejercicios;
-        this.dias = dias;
-        referencia = null;
+        this.name = name;
+        this.image = image;
+        this.days = new ArrayList<>();
+        this.exercises = new ArrayList<>();
+        reference = null;
     }
 
-    public Rutina(){}
+    public Routine(){
+        this.days = new ArrayList<>();
+        this.exercises = new ArrayList<>();
+    }
 //GETTERS Y SETTERS
 
 
-    public String getReferencia() {
-        return referencia;
+    public String getName() {
+        return name;
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-    public List<String> getDias() {
-        return dias;
-    }
-
-    public void setDias(List<String> dias) {
-        this.dias = dias;
-    }
-
-    public List<Ejercicio> getEjercicios() {
-        return ejercicios;
-    }
-
-    public void setEjercicios(List<Ejercicio> ejercicios) {
-        this.ejercicios = ejercicios;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
@@ -55,31 +43,47 @@ public class Routine {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getImage() {
+        return image;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getImg() {
-        return img;
+    public String getReference() {
+        return reference;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public List<String> getDays() {
+        return days;
+    }
+
+    public void setDays(List<String> days) {
+        this.days = days;
+    }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
     }
 
     @Override
     public String toString() {
-        return "Rutina{" +
-                "nombre='" + nombre + '\'' +
+        return "Routine{" +
+                "name='" + name + '\'' +
                 ", id='" + id + '\'' +
-                ", img='" + img + '\'' +
-                ", referencia='" + referencia + '\'' +
-                ", dias=" + dias +
-                ", ejercicios=" + ejercicios +
+                ", image='" + image + '\'' +
+                ", reference='" + reference + '\'' +
+                ", days=" + days +
+                ", exercises=" + exercises +
                 '}';
     }
 }

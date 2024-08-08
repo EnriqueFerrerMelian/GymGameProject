@@ -20,7 +20,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.gymgameproject.MainActivity;
-import com.example.gymgameproject.MenuPrincipal;
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
 import com.example.gymgameproject.classes.Advance;
 import com.example.gymgameproject.classes.AppHelper;
@@ -31,11 +31,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link StadisticsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class StadisticsFragment extends Fragment {
     private static FragmentStadisticsBinding binding;
     private static Entry pesoSeleccionado = new Entry();
@@ -46,7 +41,7 @@ public class StadisticsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentStadisticsBinding.inflate(inflater, container, false);
         AppHelper.cambiarToolbarText("Estadísticas");
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return binding.getRoot();
     }
     @Override
@@ -57,10 +52,10 @@ public class StadisticsFragment extends Fragment {
             binding.textoInfo.setVisibility(View.GONE);
         }
         if(MainActivity.getAdvanceOB()==null){
-            MainActivity.setAdvanceOB(new Advance());
+            MainActivity.setAvanceOB(new Advance());
         }
-        AppHelper.configurarChartPeso(binding);
-        AppHelper.configurarChartAvance(binding);
+        AppHelper.weightChartConfiguration(binding);
+        AppHelper.ChartAdvanceconfiguration(binding);
 
         binding.aniadirPeso.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,32 +112,32 @@ public class StadisticsFragment extends Fragment {
         dialog.setContentView(R.layout.my_bottom_sheet_add_weight);
         LinearLayout peso = dialog.findViewById(R.id.weight);
         LinearLayout objetivo = dialog.findViewById(R.id.target);
-        NumberPicker numberPeso = dialog.findViewById(R.id.numberWeight);
-        NumberPicker numberPesoDecimal = dialog.findViewById(R.id.numberDecimalWeight);
-        NumberPicker numberPesoOb = dialog.findViewById(R.id.numberObWeight);
-        NumberPicker numberPesoDecimalOb = dialog.findViewById(R.id.numberDecimalObWeight);
+        NumberPicker numberWeight = dialog.findViewById(R.id.numberWeight);
+        NumberPicker numberDecimalWeight = dialog.findViewById(R.id.numberDecimalWeight);
+        NumberPicker numberObWeight = dialog.findViewById(R.id.numberObWeight);
+        NumberPicker numberDecimalObWeight = dialog.findViewById(R.id.numberDecimalObWeight);
         Button add = dialog.findViewById(R.id.add);
         Button cancel = dialog.findViewById(R.id.cancel);
         //inicialización de numberPicker**************************
         if(status){
             peso.setVisibility(View.VISIBLE);
             objetivo.setVisibility(View.INVISIBLE);
-            numberPeso.setMinValue(1);numberPeso.setMaxValue(150);
-            numberPesoDecimal.setMinValue(0);numberPesoDecimal.setMaxValue(9);
+            numberWeight.setMinValue(1);numberWeight.setMaxValue(150);
+            numberDecimalWeight.setMinValue(0);numberDecimalWeight.setMaxValue(9);
             if(!MainActivity.getWeightOB().getWeightData().isEmpty()){
                 String[] objetivoArray = MainActivity.getWeightOB().getWeightData().get(MainActivity.getWeightOB().getWeightData().size()-1).get("y").split("\\.");
-                numberPeso.setValue(Integer.valueOf(objetivoArray[0]));
-                numberPesoDecimal.setValue(Integer.valueOf(objetivoArray[1]));
+                numberWeight.setValue(Integer.valueOf(objetivoArray[0]));
+                numberDecimalWeight.setValue(Integer.valueOf(objetivoArray[1]));
             }
         }else{
             peso.setVisibility(View.INVISIBLE);
             objetivo.setVisibility(View.VISIBLE);
-            numberPesoOb.setMinValue(0);numberPesoOb.setMaxValue(150);
-            numberPesoDecimalOb.setMinValue(0);numberPesoDecimalOb.setMaxValue(9);
+            numberObWeight.setMinValue(0);numberObWeight.setMaxValue(150);
+            numberDecimalObWeight.setMinValue(0);numberDecimalObWeight.setMaxValue(9);
             if(MainActivity.getWeightOB().getTarget()!=null){
                 String[] objetivoArray = MainActivity.getWeightOB().getTarget().split("\\.");
-                numberPesoOb.setValue(Integer.valueOf(objetivoArray[0]));
-                numberPesoDecimalOb.setValue(Integer.valueOf(objetivoArray[1]));
+                numberObWeight.setValue(Integer.valueOf(objetivoArray[0]));
+                numberDecimalObWeight.setValue(Integer.valueOf(objetivoArray[1]));
             }
         }
         //inicialización de numberPicker**********************fin*
@@ -151,10 +146,10 @@ public class StadisticsFragment extends Fragment {
             public void onClick(View view) {
                 if(status){
                     String outputWeight = numberWeight.getValue() +"." + numberDecimalWeight.getValue();
-                    AppHelper.actualizarPeso(AppHelper.addDatosPeso(outputWeight));
+                    AppHelper.updateWeight(AppHelper.addWeightData(outputWeight));
                 }else{
                     String objetivoOut = numberObWeight.getValue() +"." + numberDecimalObWeight.getValue();
-                    AppHelper.actualizarPeso(AppHelper.addDatosObjetivo(objetivoOut));
+                    AppHelper.updateWeight(AppHelper.addTargetData(objetivoOut));
                 }
                 dialog.dismiss();
             }
@@ -182,7 +177,7 @@ public class StadisticsFragment extends Fragment {
     public void showEliminarElemento(String textoInput, boolean esPeso) {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_bottom_sheet_sobrescribir_rutina);
+        dialog.setContentView(R.layout.my_bottom_sheet_overwrite_routine);
         TextView texto = dialog.findViewById(R.id.textView2);
         texto.setText(textoInput);
         Button si = dialog.findViewById(R.id.si);
@@ -198,9 +193,9 @@ public class StadisticsFragment extends Fragment {
                             AppHelper.escribirToast("Debes seleccionar un registro", getContext());
                         }else{
                             int index = binding.lineChart.getLineData().getDataSetByIndex(0).getEntryIndex(pesoSeleccionado);
-                            MainActivity.getPesoOB().getDatosPeso().remove(index);
-                            MainActivity.getPesoOB().getFecha().remove(index);
-                            AppHelper.actualizarPeso(MainActivity.getPesoOB());
+                            MainActivity.getWeightOB().getWeightData().remove(index);
+                            MainActivity.getWeightOB().getDate().remove(index);
+                            AppHelper.updateWeight(MainActivity.getWeightOB());
                         }
                     }else{
                         AppHelper.escribirToast("Debe haber al menos un registro", getContext());
@@ -208,9 +203,9 @@ public class StadisticsFragment extends Fragment {
                 }else{
                     if(binding.barChart.getBarData().getDataSets().get(0).getEntryCount()>0){
                         int index = binding.barChart.getBarData().getDataSetByIndex(0).getEntryIndex(progresoSeleccionado);
-                        MainActivity.getAvanceOB().getEjerciciosNombres().remove(index);
-                        MainActivity.getAvanceOB().getPesos().remove(index);
-                        AppHelper.actualizarAvance(MainActivity.getAvanceOB());
+                        MainActivity.getAdvanceOB().getExercisesName().remove(index);
+                        MainActivity.getAdvanceOB().getWeights().remove(index);
+                        AppHelper.advanceUpdate(MainActivity.getAdvanceOB());
                     }
                 }
                 dialog.dismiss();

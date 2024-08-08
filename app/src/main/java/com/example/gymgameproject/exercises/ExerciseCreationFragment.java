@@ -8,7 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Exercise;
+import com.example.gymgameproject.databinding.FragmentExerciseCreationBinding;
+import com.example.gymgameproject.routines.RoutineCreationFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,14 +21,14 @@ import com.example.gymgameproject.R;
  * create an instance of this fragment.
  */
 public class ExerciseCreationFragment extends Fragment {
-    private static Ejercicio ejercicio;
-    static FragmentCreacionEjercicioBinding binding;
+    private static Exercise exercise;
+    static FragmentExerciseCreationBinding binding;
 
-    public CreacionEjercicioFragment() { }
-    public static CreacionEjercicioFragment newInstance(Ejercicio ejercicioF) {
-        CreacionEjercicioFragment fragment = new CreacionEjercicioFragment();
+    public ExerciseCreationFragment() { }
+    public static ExerciseCreationFragment newInstance(Exercise exerciseF) {
+        ExerciseCreationFragment fragment = new ExerciseCreationFragment();
         Bundle args = new Bundle();
-        ejercicio = ejercicioF;
+        exercise = exerciseF;
         fragment.setArguments(args);
         return fragment;
     }
@@ -31,13 +36,13 @@ public class ExerciseCreationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentCreacionEjercicioBinding.inflate(inflater, container, false);
+        binding = FragmentExerciseCreationBinding.inflate(inflater, container, false);
         //codigo
         //inicialización de numberPicker**************************
         binding.numberPeso.setMinValue(1);binding.numberPeso.setMaxValue(100);
@@ -47,12 +52,12 @@ public class ExerciseCreationFragment extends Fragment {
         binding.numberMinutes.setMinValue(0);binding.numberMinutes.setMaxValue(59);
         binding.numberSeconds.setMinValue(0);binding.numberSeconds.setMaxValue(59);
         //inicialización de numberPicker**********************fin*
-        binding.categoria.setText(ejercicio.getCategoria());
-        binding.detailName.setText(ejercicio.getNombre());
-        binding.detailMusculos.setText(ejercicio.getMusculos());
-        binding.detailDesc.setText(ejercicio.getDescripcion());
+        binding.categoria.setText(exercise.getCategory());
+        binding.detailName.setText(exercise.getName());
+        binding.detailMusculos.setText(exercise.getMuscle());
+        binding.detailDesc.setText(exercise.getDescription());
         Glide.with(getContext())
-                .load(ejercicio.getImg())
+                .load(exercise.getImage())
                 .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                 .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
                 .into(binding.detailImage);
@@ -63,8 +68,8 @@ public class ExerciseCreationFragment extends Fragment {
                 String peso = binding.numberPeso.getValue() +"." + binding.numberPesoDecimal.getValue();
                 String repeticionesYseries = binding.numberRepeticiones.getValue() +" x "+ binding.numberVeces.getValue();
                 String tiempo = binding.numberMinutes.getValue() +" : "+ binding.numberSeconds.getValue();
-                ejercicio.setPeso(peso);ejercicio.setRepecitionesYseries(repeticionesYseries);ejercicio.setTiempo(tiempo);
-                CreacionRutinaFragment.addToDataList(ejercicio, getContext());
+                exercise.setWeight(peso);exercise.setRepetitionsAndSeries(repeticionesYseries);exercise.setTime(tiempo);
+                RoutineCreationFragment.addToDataList(exercise, getContext());
                 getParentFragmentManager().popBackStack();
             }
         });

@@ -34,8 +34,7 @@
         app:hintTextColor="@android:color/holo_blue_dark"
         app:boxBackgroundMode="none"
         android:backgroundTint="#CCCCCC"
-        android:background="@drawable/editext"
-        android:hint="Nombre">
+        android:background="@drawable/editext">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/nombre"
             android:text="admin"

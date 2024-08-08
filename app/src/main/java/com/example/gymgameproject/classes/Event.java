@@ -7,11 +7,11 @@ public class Event {
     String nombre, precio, descripcion, vacantes, profesor, horario, img1, img2, fecha;
     List<String> dias;
 
-    public Evento(){
+    public Event(){
         this.dias = new ArrayList<>();
     }
 
-    public Evento(String nombre, String precio, String descripcion, String vacantes, String profesor, String horario) {
+    public Event(String nombre, String precio, String descripcion, String vacantes, String profesor, String horario) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;

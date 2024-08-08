@@ -29,22 +29,21 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.databinding.FragmentProfileBinding;
+import com.example.gymgameproject.routines.RoutineCreationFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileFragment extends Fragment {
-    private static FragmentPerfilBinding binding;
+    private static FragmentProfileBinding binding;
     private static Uri imgUri = Uri.parse(" ");//contiene las imagenes de galeria y camara durante su administración
     private ActivityResultLauncher<Intent> camaraLauncher;
     private ActivityResultLauncher<Intent> galeriaLauncher;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
-        binding = FragmentPerfilBinding.inflate(inflater, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         cameraLauncher();// Inicializar el ActivityResultLauncher de la camara
         galleryLauncher();// Inicializar el ActivityResultLauncher, de la galeria
         AppHelper.cambiarToolbarText("Perfil");
@@ -63,10 +62,10 @@ public class ProfileFragment extends Fragment {
         });
         return binding.getRoot();
     }
-    public void showBottonSheetCambiar(TextView nombreHeader, FragmentPerfilBinding binding){
+    public void showBottonSheetCambiar(TextView nombreHeader, FragmentProfileBinding binding){
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_bottom_sheet_cambiar_password);
+        dialog.setContentView(R.layout.my_bottom_sheet_change_password);
         Button aceptar = dialog.findViewById(R.id.aceptar);
         Button cancel = dialog.findViewById(R.id.cancel);
         EditText nombre = dialog.findViewById(R.id.nombre);
@@ -98,7 +97,7 @@ public class ProfileFragment extends Fragment {
     public void showImgOpt() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_botton_sheet);
+        dialog.setContentView(R.layout.my_bottom_sheet);
         LinearLayout galeriaLayout = dialog.findViewById(R.id.galeriaLayout);
         LinearLayout camaraLayout = dialog.findViewById(R.id.camaraLayout);
         galeriaLayout.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +147,7 @@ public class ProfileFragment extends Fragment {
                                         .error(R.drawable.iconogris)//si ocurre algún error se verá por defecto
                                         .into(binding.img);
                                 if(bitmap!=null) {
-                                    AppHelper.guardarImagenUserAvatar(CreacionRutinaFragment.getImageUri(getContext(), bitmap))
+                                    AppHelper.saveUserAvatar(RoutineCreationFragment.getImageUri(getContext(), bitmap))
                                             .toString();
                                 }
                             }
@@ -178,14 +177,14 @@ public class ProfileFragment extends Fragment {
                                         .circleCrop()
                                         .error(R.drawable.iconogris)//si ocurre algún error se verá por defecto
                                         .into(binding.img);
-                                AppHelper.guardarImagenUserAvatar(data.getData());
+                                AppHelper.saveUserAvatar(data.getData());
                             }
                         }
                     }
                 }
         );
     }
-    public static FragmentPerfilBinding getPerfilBinding(){
+    public static FragmentProfileBinding getPerfilBinding(){
         return binding;
     }
 

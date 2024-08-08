@@ -10,24 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObjectAdapter extends RecyclerView.Adapter<ObjetoAdapter.ViewHolder>{
-    private List<Evento> dataArrayList = new ArrayList<Evento>();
-    public ObjetoAdapter(List<Evento> dataArrayList) {
+public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder>{
+    private List<Event> dataArrayList = new ArrayList<Event>();
+    public ObjectAdapter(List<Event> dataArrayList) {
         this.dataArrayList = dataArrayList;
 
     }
     @NonNull
     @Override
-    public ObjetoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_objeto, parent, false);
-        return new ObjetoAdapter.ViewHolder(view);
+    public ObjectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_object, parent, false);
+        return new ObjectAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ObjetoAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ObjectAdapter.ViewHolder holder, int position) {
         holder.bind(dataArrayList.get(position));
 
     }
@@ -52,7 +56,7 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjetoAdapter.ViewHolder
             domingo = itemView.findViewById(R.id.domingo);
 
         }
-        public void bind(Evento model){
+        public void bind(Event model){
             nombre.setText(model.getNombre());
             horario.setText(model.getHorario());
             if(model.getImg2()!=null){

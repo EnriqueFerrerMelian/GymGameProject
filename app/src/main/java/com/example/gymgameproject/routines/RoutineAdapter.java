@@ -11,29 +11,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Routine;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutineAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolder>{
-    private List<Rutina> dataArrayList = new ArrayList<Rutina>();
+public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.ViewHolder>{
+    private List<Routine> dataArrayList = new ArrayList<Routine>();
 
-    public RutinaAdapter(List<Rutina> dataArrayList) {
+    public RoutineAdapter(List<Routine> dataArrayList) {
         this.dataArrayList = dataArrayList;
 
     }
 
-    public void setListaFiltrada(List<Rutina> listaFiltrada){
+    public void setListaFiltrada(List<Routine> listaFiltrada){
         this.dataArrayList = listaFiltrada;
     }
     @NonNull
     @Override
-    public RutinaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rutina_generic, parent, false);
-        return new RutinaAdapter.ViewHolder(view);
+    public RoutineAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_generic_routine, parent, false);
+        return new RoutineAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RutinaAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull RoutineAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.bind(dataArrayList.get(position));
     }
 
@@ -57,37 +61,37 @@ public class RoutineAdapter extends RecyclerView.Adapter<RutinaAdapter.ViewHolde
             sabado = itemView.findViewById(R.id.sabado);
             domingo = itemView.findViewById(R.id.domingo);
         }
-        public void bind(Rutina model){
-            nombre.setText(model.getNombre());
+        public void bind(Routine model){
+            nombre.setText(model.getName());
             rutinaId = model.getId();
-            if(model.getImg()!=null){
+            if(model.getImage()!=null){
                 Glide.with(imagen.getContext())
-                        .load(model.getImg())
+                        .load(model.getImage())
                         .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                         .circleCrop()
                         .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
                         .into(imagen);
             }
-            for (int i = 0; i < model.getDias().size(); i++) {
-                if(model.getDias().get(i).equals("l")){
+            for (int i = 0; i < model.getDays().size(); i++) {
+                if(model.getDays().get(i).equals("l")){
                     lunes.setTextColor(Color.rgb(255, 127, 39));
                 }
-                if(model.getDias().get(i).equals("m")){
+                if(model.getDays().get(i).equals("m")){
                     martes.setTextColor(Color.rgb(255, 127, 39));
                 }
-                if(model.getDias().get(i).equals("x")){
+                if(model.getDays().get(i).equals("x")){
                     miercoles.setTextColor(Color.rgb(255, 127, 39));
                 }
-                if(model.getDias().get(i).equals("j")){
+                if(model.getDays().get(i).equals("j")){
                     jueves.setTextColor(Color.rgb(255, 127, 39));
                 }
-                if(model.getDias().get(i).equals("v")){
+                if(model.getDays().get(i).equals("v")){
                     viernes.setTextColor(Color.rgb(255, 127, 39));
                 }
-                if(model.getDias().get(i).equals("s")){
+                if(model.getDays().get(i).equals("s")){
                     sabado.setTextColor(Color.rgb(255, 127, 39));
                 }
-                if(model.getDias().get(i).equals("d")){
+                if(model.getDays().get(i).equals("d")){
                     domingo.setTextColor(Color.rgb(255, 127, 39));
                 }
             }

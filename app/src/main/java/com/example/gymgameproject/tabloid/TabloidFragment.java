@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTabHost;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,25 +15,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.classes.News;
+import com.example.gymgameproject.databinding.FragmentTabloidBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TabloidFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class TabloidFragment extends Fragment  implements NoticiaFbAdapter.ItemClickListener {
-    private static FragmentTablonBinding binding;
+public class TabloidFragment extends Fragment  implements NewsFbAdapter.ItemClickListener {
+    private static FragmentTabloidBinding binding;//FragmentTablonBinding
     //recyclerView **********
-    private NoticiaFbAdapter noticiaFbAdapter;
+    private NewsFbAdapter noticiaFbAdapter;
     private RecyclerView recyclerView;
     //recyclerView *******fin
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentTablonBinding.inflate(inflater, container, false);
+        binding = FragmentTabloidBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -41,19 +42,19 @@ public class TabloidFragment extends Fragment  implements NoticiaFbAdapter.ItemC
         //Obtengo la fecha de hoy
         Calendar cal = new GregorianCalendar();
         Date date = cal.getTime();
-        FirebaseRecyclerOptions<Noticia> options =
-                new FirebaseRecyclerOptions.Builder<Noticia>()
+        FirebaseRecyclerOptions<News> options =
+                new FirebaseRecyclerOptions.Builder<News>()
                         .setQuery(FirebaseDatabase.getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                                .getReference("noticias"), Noticia.class)
+                                .getReference("noticias"), News.class)
                         .build();
-        noticiaFbAdapter = new NoticiaFbAdapter(options, this::onItemClick);
+        noticiaFbAdapter = new NewsFbAdapter(options, this::onItemClick);
         recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(noticiaFbAdapter);
     }
     @Override
-    public void onItemClick(Noticia noticia) {
-        Fragment fragment = DetalleNoticiaFragment.newInstance(noticia);
+    public void onItemClick(News noticia) {
+        Fragment fragment = NewsDetailFragment.newInstance(noticia);
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment, "nota").addToBackStack(null);
         fragmentTransaction.commit();

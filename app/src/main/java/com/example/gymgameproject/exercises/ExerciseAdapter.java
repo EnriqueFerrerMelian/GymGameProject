@@ -10,27 +10,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Exercise;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExerciseAdapter extends RecyclerView.Adapter<EjercicioAdapter.ViewHolder>{
-    private static List<Ejercicio> dataArrayList = new ArrayList<Ejercicio>();
+public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ViewHolder>{
+    private static List<Exercise> dataArrayList = new ArrayList<Exercise>();
     private ViewHolder.ItemClickListener clickListener;
 
 
-    public EjercicioAdapter(List<Ejercicio> dataArrayList, ViewHolder.ItemClickListener clickListener) {
+    public ExerciseAdapter(List<Exercise> dataArrayList, ViewHolder.ItemClickListener clickListener) {
         this.dataArrayList = dataArrayList;
         this.clickListener = clickListener;
     }
 
-    public void setListaFiltrada(List<Ejercicio> listaFiltrada){
+    public void setListaFiltrada(List<Exercise> listaFiltrada){
         this.dataArrayList = listaFiltrada;
         notifyDataSetChanged();//esto es para un buscador
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ejercicio, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise, parent, false);
         return new ViewHolder(view);
     }
 
@@ -62,10 +66,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<EjercicioAdapter.ViewH
             imagen = itemView.findViewById(R.id.listImage01);
         }
 
-        public void bind(Ejercicio ejercicio) {
-            nombre.setText(ejercicio.getNombre());
+        public void bind(Exercise ejercicio) {
+            nombre.setText(ejercicio.getName());
             Glide.with(imagen.getContext())
-                    .load(ejercicio.getImg())
+                    .load(ejercicio.getImage())
                     .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                     .circleCrop()
                     .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
@@ -74,7 +78,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<EjercicioAdapter.ViewH
         }
 
         public interface ItemClickListener{
-            public void onItemClick(Ejercicio ejercicio);
+            public void onItemClick(Exercise ejercicio);
         }
     }
 

@@ -1,16 +1,11 @@
 package com.example.gymgameproject;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gymgameproject.classes.Activity;
 import com.example.gymgameproject.classes.Advance;
@@ -24,14 +19,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.parse.ParseObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-
 
 /**
  * NOTA: Al registrarse en el gimnasio, el administrador dará una clave generada de forma aleatoria
@@ -41,27 +34,18 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static User userOB = new User();
-    private static Weight weightOb = new Weight();
+    private static Weight weightOB = new Weight();
     private static Advance advanceOB = new Advance();
     private static List<Activity> activitiesOBs = new ArrayList<>();
     private static List<Routine> routinesOBs = new ArrayList<>();
-    private static Boolean confirmed = false;
+    private static Boolean confirm = false;
+
 
     ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ParseObject firstObject = new  ParseObject("FirstClass");
-        firstObject.put("message","Hey ! First message from android. Parse is now connected");
-        firstObject.saveInBackground(e -> {
-            if (e != null){
-                Log.e("MainActivity", e.getLocalizedMessage());
-                    }else{
-                    Log.d("MainActivity","Object saved.");
-                }
-            });
-        }
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         validarFechaActividad(this);
@@ -100,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
      * @param claveInput valor de 'clave' del usuario.
      */
     public void verificarUsuario(String usuarioInput, String claveInput){
-        String claveEncriptada = AppHelper.encriptar(claveInput, claveInput);
-        String usuarioEncriptado = AppHelper.encriptar(usuarioInput, usuarioInput);
+        String claveEncriptada = AppHelper.encript(claveInput, claveInput);
+        String usuarioEncriptado = AppHelper.encript(usuarioInput, usuarioInput);
         DatabaseReference ref = FirebaseDatabase.getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
                 .getReference("usuarios");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -111,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot data: dataSnapshot.getChildren()) {//
                     if(data.child("usuario").getValue().equals(usuarioEncriptado) && data.child("clave").getValue().equals(claveEncriptada)){
                         userOB.setId(data.getKey());
-                        AppHelper.actualizarApp();
+                        AppHelper.updateApp();
                         confirmado=true;
-                        //ejecuto el fragmento 'MenuPrincipal'
+                        //ejecuto el fragmento 'MainMenu'
                         irAMenuPrincipal();
 
                         //pongo a null los campos de texto
@@ -132,10 +116,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     /**
-     * Inicia un intent al activity MenuPrincipal.
+     * Inicia un intent al activity MainMenu.
      */
     public void irAMenuPrincipal(){
-        Intent intent = new Intent(this, MenuPrincipal.class);
+        Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
 
@@ -165,23 +149,23 @@ public class MainActivity extends AppCompatActivity {
         return userOB;
     }
 
-    public static void setUserOB(User userOb) {
-        MainActivity.userOB = userOb;
+    public static void setUserOB(User usuarioOB) {
+        MainActivity.userOB = usuarioOB;
     }
 
     public static Weight getWeightOB() {
-        return weightOb;
+        return weightOB;
     }
 
     public static void setWeightOB(Weight pesoOB) {
-        MainActivity.weightOb = pesoOB;
+        MainActivity.weightOB = weightOB;
     }
 
     public static Advance getAdvanceOB() {
         return advanceOB;
     }
 
-    public static void setAdvanceOB(Advance avanceOB) {
+    public static void setAvanceOB(Advance avanceOB) {
         MainActivity.advanceOB = avanceOB;
     }
 
@@ -189,24 +173,24 @@ public class MainActivity extends AppCompatActivity {
         return activitiesOBs;
     }
 
-    public static void setActivitiesOBs(List<Activity> activitiesOBs) {
-        MainActivity.activitiesOBs = activitiesOBs;
+    public static void setActivitiesOBs(List<Activity> actividadesOBs) {
+        MainActivity.activitiesOBs = actividadesOBs;
     }
 
-    public static List<Routine> getRoutinsOBs() {
+    public static List<Routine> getRoutinesOBs() {
         return routinesOBs;
     }
 
-    public static void setRoutinsOBs(List<Routine> routinesOBs) {
-        MainActivity.routinesOBs = routinesOBs;
+    public static void setRoutinesOBs(List<Routine> rutinasOBs) {
+        MainActivity.routinesOBs = rutinasOBs;
     }
 
-    public static Boolean getConfirmed() {
-        return confirmed;
+    public static Boolean getConfirm() {
+        return confirm;
     }
 
-    public static void setConfirme(Boolean confirmed) {
-        MainActivity.confirmed = confirmed;
+    public static void setConfirm(Boolean confirmado) {
+        MainActivity.confirm = confirmado;
     }
 
     public ActivityMainBinding getBinding() {

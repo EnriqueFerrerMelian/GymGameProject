@@ -19,7 +19,21 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.MainActivity;
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Exercise;
+import com.example.gymgameproject.classes.Routine;
+import com.example.gymgameproject.classes.User;
+import com.example.gymgameproject.databinding.FragmentExerciseDetailBinding;
+import com.example.gymgameproject.routines.RoutineDetailFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,12 +41,12 @@ import com.example.gymgameproject.R;
  * create an instance of this fragment.
  */
 public class ExerciseDetailFragment extends Fragment {
-    private static Ejercicio ejercicio;
-    private static FragmentDetalleEjercicioBinding binding;
+    private static Exercise exercise;
+    private static FragmentExerciseDetailBinding binding;
 
-    public static DetalleEjercicioFragment newInstance(Ejercicio ejercicioF) {
-        DetalleEjercicioFragment fragment = new DetalleEjercicioFragment();
-        ejercicio = ejercicioF;
+    public static ExerciseDetailFragment newInstance(Exercise exerciseF) {
+        ExerciseDetailFragment fragment = new ExerciseDetailFragment();
+        exercise = exerciseF;
         return fragment;
     }
     @Override
@@ -43,22 +57,22 @@ public class ExerciseDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDetalleEjercicioBinding.inflate(inflater, container, false);
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        System.out.println("Ejercicio id: "+ ejercicio.getId());
+        binding = FragmentExerciseDetailBinding.inflate(inflater, container, false);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        System.out.println("Ejercicio id: "+ exercise.getId());
         //codigo
-        if(!isEmpty(ejercicio.getTiempo())) {binding.categoria.setText(ejercicio.getCategoria());}
-        if(!isEmpty(ejercicio.getNombre())) {binding.detailName.setText(ejercicio.getNombre());}
-        if(!isEmpty(ejercicio.getMusculos())) {binding.detailMusculos.setText(ejercicio.getMusculos());}
-        if(!isEmpty(ejercicio.getDescripcion())) {binding.detailDesc.setText(ejercicio.getDescripcion());}
+        if(!isEmpty(exercise.getTime())) {binding.categoria.setText(exercise.getTime());}
+        if(!isEmpty(exercise.getName())) {binding.detailName.setText(exercise.getName());}
+        if(!isEmpty(exercise.getMuscle())) {binding.detailMusculos.setText(exercise.getMuscle());}
+        if(!isEmpty(exercise.getDescription())) {binding.detailDesc.setText(exercise.getDescription());}
         Glide.with(getContext())
-                .load(Uri.parse(ejercicio.getImg()))
+                .load(Uri.parse(exercise.getImage()))
                 .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                 .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
                 .into(binding.detailImage);
-        if(!isEmpty(ejercicio.getPeso())) {binding.numPeso.setText(ejercicio.getPeso());}
-        if(!isEmpty(ejercicio.getRepecitionesYseries())) { binding.numRepeticiones.setText(ejercicio.getRepecitionesYseries());}
-        if(!isEmpty(ejercicio.getTiempo())) {binding.numTiempo.setText(ejercicio.getTiempo());}
+        if(!isEmpty(exercise.getWeight())) {binding.numPeso.setText(exercise.getWeight());}
+        if(!isEmpty(exercise.getRepetitionsAndSeries())) { binding.numRepeticiones.setText(exercise.getRepetitionsAndSeries());}
+        if(!isEmpty(exercise.getTime())) {binding.numTiempo.setText(exercise.getTime());}
 
         binding.modBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +87,7 @@ public class ExerciseDetailFragment extends Fragment {
     public void showBottonSheet(){
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_bottom_sheet_ejercicio);
+        dialog.setContentView(R.layout.my_bottom_sheet_exercise);
         Button aceptar = dialog.findViewById(R.id.aceptar);
         Button cancel = dialog.findViewById(R.id.cancel);
         //inicialización de numberPicker**************************
@@ -111,7 +125,7 @@ public class ExerciseDetailFragment extends Fragment {
                 binding.numPeso.setText(numberPeso.getValue() +"."+ numberPesoDecimal.getValue());
                 binding.numRepeticiones.setText(repeticiones.getValue() + " x " + series.getValue());
                 binding.numTiempo.setText(minutos.getValue() + " : " + segundos.getValue());
-                updateEjercicio(DetallesRutinaFragment.getRutina());
+                updateExercise(RoutineDetailFragment.getRoutine());
                 dialog.dismiss();
             }
         });
@@ -132,24 +146,24 @@ public class ExerciseDetailFragment extends Fragment {
      * ejercicios de la rutina seleccionada. Guarda en el ejercicio seleccionado el nuevo peso y
      * repeticiones. Con el index seleccionamos el ejercicio a actualizar en la base de datos
      * añadiendolo a la referencia.
-     * @param rutina seleccionada.
+     * @param routine seleccionada.
      */
-    public void updateEjercicio(Rutina rutina) {
+    public void updateExercise(Routine routine) {//updateEjercicio
         int index = 0;
-        for (int i = 0; i < rutina.getEjercicios().size(); i++) {
-            if(rutina.getEjercicios().get(i).getId()== ejercicio.getId()){
+        for (int i = 0; i < routine.getExercises().size(); i++) {
+            if(routine.getExercises().get(i).getId()== exercise.getId()){
                 index = i;
             }
         }
-        ejercicio.setPeso(binding.numPeso.getText().toString());
-        ejercicio.setRepecitionesYseries(binding.numRepeticiones.getText().toString());
-        ejercicio.setTiempo(binding.numTiempo.getText().toString());
-        System.out.println(ejercicio);
+        exercise.setWeight(binding.numPeso.getText().toString());
+        exercise.setRepetitionsAndSeries(binding.numRepeticiones.getText().toString());
+        exercise.setTime(binding.numTiempo.getText().toString());
+        System.out.println(exercise);
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+MainActivity.getUsuarioOB().getId()+"/rutinas/"+
-                        rutina.getNombre()+"/ejercicios/"+index);
-        ref.setValue(ejercicio).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .getReference("usuarios/"+ MainActivity.getUserOB().getId()+"/rutinas/"+
+                        routine.getName()+"/ejercicios/"+index);
+        ref.setValue(exercise).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 actualizarAvance();
@@ -164,27 +178,27 @@ public class ExerciseDetailFragment extends Fragment {
         System.out.println("actualizarAvance()");
         int index = 0;
         boolean bandera = false;
-        if(MainActivity.getAvanceOB().getEjerciciosNombres().size()>0) {
-            for (int i = 0; i < MainActivity.getAvanceOB().getEjerciciosNombres().size(); i++) {
-                if (MainActivity.getAvanceOB().getEjerciciosNombres().get(i).equals(ejercicio.getNombre())) {
+        if(MainActivity.getAdvanceOB().getExercisesName().size()>0) {
+            for (int i = 0; i < MainActivity.getAdvanceOB().getExercisesName().size(); i++) {
+                if (MainActivity.getAdvanceOB().getExercisesName().get(i).equals(exercise.getName())) {
                     index = i;
                     bandera = true;
                 }
             }
             if(bandera){
-                MainActivity.getAvanceOB().getPesos().set(index, ejercicio.getPeso());
+                MainActivity.getAdvanceOB().getWeights().set(index, exercise.getWeight());
             }else{
-                MainActivity.getAvanceOB().getEjerciciosNombres().add(ejercicio.getNombre());
-                MainActivity.getAvanceOB().getPesos().add(ejercicio.getPeso());
+                MainActivity.getAdvanceOB().getExercisesName().add(exercise.getName());
+                MainActivity.getAdvanceOB().getWeights().add(exercise.getWeight());
             }
         }else{
-            MainActivity.getAvanceOB().getEjerciciosNombres().add(ejercicio.getNombre());
-            MainActivity.getAvanceOB().getPesos().add(ejercicio.getPeso());
+            MainActivity.getAdvanceOB().getExercisesName().add(exercise.getName());
+            MainActivity.getAdvanceOB().getWeights().add(exercise.getWeight());
         }
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/" + MainActivity.getUsuarioOB().getId() + "/avance");
-        ref.setValue(MainActivity.getAvanceOB()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .getReference("usuarios/" + MainActivity.getUserOB().getId() + "/avance");
+        ref.setValue(MainActivity.getAdvanceOB()).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 actualizarUsuario();
@@ -195,11 +209,11 @@ public class ExerciseDetailFragment extends Fragment {
         System.out.println("Actualizando usuario");
         DatabaseReference ref = FirebaseDatabase
                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
-                .getReference("usuarios/"+MainActivity.getUsuarioOB().getId());
+                .getReference("usuarios/"+MainActivity.getUserOB().getId());
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {//dataSnapshot son todos los usuarios
-                MainActivity.setUsuarioOB(dataSnapshot.getValue(Usuario.class));
+                MainActivity.setUserOB(dataSnapshot.getValue(User.class));
             }
             @Override
             public void onCancelled(DatabaseError error) {

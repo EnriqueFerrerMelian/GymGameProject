@@ -15,26 +15,26 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Exercise;
+import com.example.gymgameproject.databinding.FragmentExercisesListBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ExercisesListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ExercisesListFragment extends Fragment implements EjercicioFbAdapter.ItemClickListener {
-    private EjercicioFbAdapter ejercicioFbAdapter;
+public class ExercisesListFragment extends Fragment implements ExerciseFbAdapter.ItemClickListener {
+    private ExerciseFbAdapter ejercicioFbAdapter;
     private RecyclerView recyclerView;
-    static FragmentListaEjerciciosBinding binding;
+    static FragmentExercisesListBinding binding;
     private static String valorSpinner = "";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentListaEjerciciosBinding.inflate(inflater, container, false);
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding = FragmentExercisesListBinding.inflate(inflater, container, false);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return binding.getRoot();
     }
 
@@ -94,15 +94,15 @@ public class ExercisesListFragment extends Fragment implements EjercicioFbAdapte
      * Este método carga el recyclerView con todos los ejercicios de la base de datos
      */
     public void cargarRecycler(){
-        FirebaseRecyclerOptions<Ejercicio> options =
-                new FirebaseRecyclerOptions.Builder<Ejercicio>()
+        FirebaseRecyclerOptions<Exercise> options =
+                new FirebaseRecyclerOptions.Builder<Exercise>()
                         .setQuery(FirebaseDatabase
                                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
                                 .getReference()
-                                .child("ejercicios"), Ejercicio.class)
+                                .child("ejercicios"), Exercise.class)
                         .build();
 
-        ejercicioFbAdapter = new EjercicioFbAdapter(options, this::onItemClick);
+        ejercicioFbAdapter = new ExerciseFbAdapter(options, this::onItemClick);
         recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(ejercicioFbAdapter);
@@ -114,20 +114,20 @@ public class ExercisesListFragment extends Fragment implements EjercicioFbAdapte
      * @param valor
      */
     public void cargarDesdeSpiner(String valor){
-        FirebaseRecyclerOptions<Ejercicio> options =
-                new FirebaseRecyclerOptions.Builder<Ejercicio>()
+        FirebaseRecyclerOptions<Exercise> options =
+                new FirebaseRecyclerOptions.Builder<Exercise>()
                         .setQuery(FirebaseDatabase
                                 .getInstance("https://olimplicacion-3ba86-default-rtdb.europe-west1.firebasedatabase.app")
                                 .getReference()
-                                .child("ejercicios").orderByChild("categoria").equalTo(valor), Ejercicio.class)
+                                .child("ejercicios").orderByChild("categoria").equalTo(valor), Exercise.class)
                         .build();
-        ejercicioFbAdapter = new EjercicioFbAdapter(options, this::onItemClick);
+        ejercicioFbAdapter = new ExerciseFbAdapter(options, this::onItemClick);
         recyclerView.setAdapter(ejercicioFbAdapter);
         ejercicioFbAdapter.startListening();
     }
     @Override
-    public void onItemClick(Ejercicio ejercicio) {
-        Fragment fragment = CreacionEjercicioFragment.newInstance(ejercicio);
+    public void onItemClick(Exercise ejercicio) {
+        Fragment fragment = ExerciseCreationFragment.newInstance(ejercicio);
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment, "nota").addToBackStack(null);
         fragmentTransaction.commit();

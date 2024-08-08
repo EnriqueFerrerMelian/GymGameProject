@@ -13,12 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.gymgameproject.MenuPrincipal;
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
 import com.example.gymgameproject.classes.Activity;
 import com.example.gymgameproject.classes.AppHelper;
 import com.example.gymgameproject.databinding.FragmentActivitiesBinding;
-import com.example.gymgameproject.databinding.FragmentActivitiesDetailsBinding;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -41,7 +40,7 @@ public class ActivitiesFragment extends Fragment implements ActivitiesFbAdapter.
                              Bundle savedInstanceState) {
         binding = FragmentActivitiesBinding.inflate(inflater, container, false);
         AppHelper.cambiarToolbarText("Actividades");
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return binding.getRoot();
     }
 

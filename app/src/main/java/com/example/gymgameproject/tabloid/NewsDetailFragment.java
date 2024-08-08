@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.AppHelper;
+import com.example.gymgameproject.classes.News;
+import com.example.gymgameproject.databinding.FragmentNewsDetailBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,13 +20,13 @@ import com.example.gymgameproject.R;
  * create an instance of this fragment.
  */
 public class NewsDetailFragment extends Fragment {
-    FragmentDetalleNoticiaBinding binding;
-    private static Noticia noticia;
-    public DetalleNoticiaFragment() {
+    FragmentNewsDetailBinding binding;
+    private static News noticia;
+    public NewsDetailFragment() {
         // Required empty public constructor
     }
-    public static DetalleNoticiaFragment newInstance(Noticia noticiaF) {
-        DetalleNoticiaFragment fragment = new DetalleNoticiaFragment();
+    public static NewsDetailFragment newInstance(News noticiaF) {
+        NewsDetailFragment fragment = new NewsDetailFragment();
         noticia = noticiaF;
         AppHelper.cambiarToolbarText(noticia.getTitulo());
         return fragment;
@@ -34,8 +38,8 @@ public class NewsDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentDetalleNoticiaBinding.inflate(inflater, container, false);
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        binding = FragmentNewsDetailBinding.inflate(inflater, container, false);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         AppHelper.cargarNoticia(binding, getContext(), noticia);
         return binding.getRoot();
     }

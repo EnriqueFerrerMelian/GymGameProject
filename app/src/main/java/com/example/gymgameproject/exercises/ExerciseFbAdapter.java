@@ -8,9 +8,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.gymgameproject.R;
+import com.example.gymgameproject.classes.Exercise;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.imageview.ShapeableImageView;
 
-public class ExerciseFbAdapter extends FirebaseRecyclerAdapter<Ejercicio, EjercicioFbAdapter.ViewHolder> {
+public class ExerciseFbAdapter extends FirebaseRecyclerAdapter<Exercise, ExerciseFbAdapter.ViewHolder> {
     private ItemClickListener clickListener;
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -18,7 +23,7 @@ public class ExerciseFbAdapter extends FirebaseRecyclerAdapter<Ejercicio, Ejerci
      *
      * @param options
      */
-    public EjercicioFbAdapter(@NonNull FirebaseRecyclerOptions<Ejercicio> options, ItemClickListener clickListener) {
+    public ExerciseFbAdapter(@NonNull FirebaseRecyclerOptions<Exercise> options, ItemClickListener clickListener) {
         super(options);
         this.clickListener = clickListener;
     }
@@ -34,10 +39,10 @@ public class ExerciseFbAdapter extends FirebaseRecyclerAdapter<Ejercicio, Ejerci
      * @param model the model object containing the data that should be used to populate the view.
      */
     @Override
-    protected void onBindViewHolder(@NonNull EjercicioFbAdapter.ViewHolder holder, int position, @NonNull Ejercicio model) {
-        holder.nombre.setText(model.getNombre());
+    protected void onBindViewHolder(@NonNull ExerciseFbAdapter.ViewHolder holder, int position, @NonNull Exercise model) {
+        holder.nombre.setText(model.getName());
         Glide.with(holder.imagen.getContext())
-                .load(model.getImg())
+                .load(model.getImage())
                 .placeholder(R.drawable.baseline_add_242)//si no hay imagen carga una por defecto
                 .circleCrop()
                 .error(R.drawable.baseline_add_242)//si ocurre algún error se verá por defecto
@@ -52,9 +57,9 @@ public class ExerciseFbAdapter extends FirebaseRecyclerAdapter<Ejercicio, Ejerci
 
     @NonNull
     @Override
-    public EjercicioFbAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ejercicio, parent, false);
-        return new EjercicioFbAdapter.ViewHolder(view);
+    public ExerciseFbAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_exercise, parent, false);
+        return new ExerciseFbAdapter.ViewHolder(view);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -68,6 +73,6 @@ public class ExerciseFbAdapter extends FirebaseRecyclerAdapter<Ejercicio, Ejerci
         }
     }
     public interface ItemClickListener{
-        public void onItemClick(Ejercicio ejercicio);
+        public void onItemClick(Exercise ejercicio);
     }
 }

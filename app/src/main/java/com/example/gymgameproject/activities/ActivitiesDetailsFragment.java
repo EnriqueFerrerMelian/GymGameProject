@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gymgameproject.MainActivity;
-import com.example.gymgameproject.MenuPrincipal;
-import com.example.gymgameproject.R;
+import com.example.gymgameproject.MainMenu;
 import com.example.gymgameproject.classes.Activity;
 import com.example.gymgameproject.classes.AppHelper;
 import com.example.gymgameproject.databinding.FragmentActivitiesDetailsBinding;
@@ -43,7 +42,7 @@ public class ActivitiesDetailsFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentActivitiesDetailsBinding.inflate(inflater, container, false);
-        ((MenuPrincipal) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainMenu) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         AppHelper.loadActivity(binding, getContext(), activity);
         boolean esta = false;

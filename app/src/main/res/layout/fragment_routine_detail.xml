@@ -129,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:listitem="@layout/item_ejercicio" />
+        tools:listitem="@layout/item_exercise" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -147,12 +147,12 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/modificar"
+            android:id="@+id/modify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:text="Modificar"
+            android:text="Modify"
             android:textAllCaps="false"
             android:textStyle="bold"
             style="@style/BUTTON"/>

@@ -5,28 +5,29 @@ import java.util.Map;
 
 public class User {
     String id;
-    String nombre, clave, usuario, imagen;
-    Map<String, Object> rutinas;
-    Map<String, Object> peso;
-    Map<String, Object> avance;
-    Map<String, Object> actividad;
+    String name, password, user, image;
+    Map<String, Object> routines;
+    Map<String, Object> weight;
+    Map<String, Object> advance;
+    Map<String, Object> activity;
 
-    public Usuario(String id, String nombre,String usuario, String clave,String imagen, Map<String, Object> rutinas,  Map<String, Object>  peso, Map<String, Object>  actividad) {
+    public User(String id, String name, String password, String user, String image) {
         this.id = id;
-        this.nombre = nombre;
-        this.clave = clave;
-        this.imagen = imagen;
-        this.rutinas = rutinas;
-        this.peso = peso;
-        this.usuario = usuario;
-        this.actividad = actividad;
+        this.name = name;
+        this.password = password;
+        this.user = user;
+        this.image = image;
+        this.routines = new HashMap<>();
+        this.weight = new HashMap<>();
+        this.advance = new HashMap<>();
+        this.activity = new HashMap<>();
     }
-    public Usuario(){
-        this.rutinas = new HashMap<>();
-        this.peso = new HashMap<>();
-        this.avance = new HashMap<>();
-        this.actividad = new HashMap<>();
 
+    public User(){
+        this.routines = new HashMap<>();
+        this.weight = new HashMap<>();
+        this.advance = new HashMap<>();
+        this.activity = new HashMap<>();
     }
 
     public String getId() {
@@ -37,83 +38,82 @@ public class User {
         this.id = id;
     }
 
-    public Map<String, Object> getActividad() {
-        return actividad;
+    public String getName() {
+        return name;
     }
 
-    public void setActividad(Map<String, Object> actividad) {
-        this.actividad = actividad;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getPassword() {
+        return password;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public Map<String, Object> getAvance() {
-        return avance;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public void setAvance(Map<String, Object> avance) {
-        this.avance = avance;
+    public String getImage() {
+        return image;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public Map<String, Object> getPeso() {
-        return peso;
+    public Map<String, Object> getRoutines() {
+        return routines;
     }
 
-    public void setPeso(Map<String, Object> peso) {
-        this.peso = peso;
+    public void setRoutines(Map<String, Object> routines) {
+        this.routines = routines;
     }
 
-    public String getClave() {
-        return clave;
+    public Map<String, Object> getWeight() {
+        return weight;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setWeight(Map<String, Object> weight) {
+        this.weight = weight;
     }
 
-    public Map<String, Object> getRutinas() {
-        return rutinas;
+    public Map<String, Object> getAdvance() {
+        return advance;
     }
 
-    public void setRutinas(Map<String, Object> rutinas) {
-        this.rutinas = rutinas;
+    public void setAdvance(Map<String, Object> advance) {
+        this.advance = advance;
     }
 
-
-    public String getNombre() {
-        return nombre;
+    public Map<String, Object> getActivity() {
+        return activity;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setActivity(Map<String, Object> activity) {
+        this.activity = activity;
     }
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", clave='" + clave + '\'' +
-                ", usuario='" + usuario + '\'' +
-                ", imagen='" + imagen + '\'' +
-                ", rutinas=" + rutinas +
-                ", peso=" + peso +
-                ", avance=" + avance +
-                ", actividad=" + actividad +
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", user='" + user + '\'' +
+                ", image='" + image + '\'' +
+                ", routines=" + routines +
+                ", weight=" + weight +
+                ", advance=" + advance +
+                ", activity=" + activity +
                 '}';
     }
 }

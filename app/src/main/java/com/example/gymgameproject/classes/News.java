@@ -5,14 +5,14 @@ public class News {
     String[] caracteresEspeciales = {"Á","É","Í","Ó","Ú","Ñ","á","é","í","ñ","ó","ú"};
     String[] caracteresNoEspeciales = {"A","E","I","O","U","N","a","e","i","n","o","u"};
 
-    public Noticia(String imagen, String titulo, String subtitulo, String contenido) {
+    public News(String imagen, String titulo, String subtitulo, String contenido) {
         this.imagen = imagen;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
         this.contenido = contenido;
     }
 
-    public Noticia() { }
+    public News() { }
 
     public String getImagen() {
         return imagen;
