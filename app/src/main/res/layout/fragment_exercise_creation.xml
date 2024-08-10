@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".exercises.ExercisesDetailFragment"
+    tools:context=".exercises.ExerciseDetailFragment"
     style="@style/SCREEN">
 
     <ScrollView
@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -25,7 +25,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:layout_marginTop="14dp"
-                android:text="apertura_con_mancuernas"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/darkgrey"
                 android:textSize="20sp"
@@ -44,8 +44,9 @@
                     android:layout_width="380dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/exerciseDescription"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/apertura_con_mancuernas" />
+                    android:src="@drawable/dumbbell_opening" />
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -59,15 +60,15 @@
                     android:layout_marginStart="10dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:text="Categoría: "
+                    android:text="@string/category"
                     android:textColor="@color/darkgrey"/>
                 <TextView
-                    android:id="@+id/categoria"
+                    android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
-                    android:text="Categoria"
+                    android:text=""
                     android:textColor="@color/darkgrey"
                     android:textSize="20sp"/>
             </androidx.cardview.widget.CardView>
@@ -83,15 +84,15 @@
                     android:layout_marginStart="10dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:text="Músculos: "
+                    android:text="@string/muscles"
                     android:textColor="@color/darkgrey"/>
                 <TextView
-                    android:id="@+id/detailMusculos"
+                    android:id="@+id/detailMuscle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
-                    android:text="apertura_con_mancuernasM"
+                    android:text=""
                     android:textColor="@color/darkgrey"
                     android:textSize="20sp"/>
             </androidx.cardview.widget.CardView>
@@ -107,7 +108,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:text="Descripción: "
+                    android:text="@string/description"
                     android:textColor="@color/darkgrey"/>
                 <TextView
                     android:id="@+id/detailDesc"
@@ -115,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
-                    android:text="apertura_con_mancuernasC"
+                    android:text=""
                     android:textColor="@color/darkgrey"
                     android:textSize="20sp"/>
             </androidx.cardview.widget.CardView>
@@ -125,7 +126,7 @@
                 android:layout_height="wrap_content"
                 app:cardElevation="12dp">
                 <LinearLayout
-                    android:id="@+id/contenedorPeso"
+                    android:id="@+id/weightContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -134,10 +135,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/icon_weight"
+                        android:drawableStart="@drawable/icon_weight"
                         android:layout_gravity="center"
-                        android:text="@string/peso"
-                        android:textSize="24sp" />
+                        android:text="@string/weight"
+                        android:textSize="24sp"
+                        tools:ignore="UseCompatTextViewDrawableXml" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -145,7 +147,7 @@
                         android:textAlignment="center">
 
                         <NumberPicker
-                            android:id="@+id/numberPeso"
+                            android:id="@+id/weightNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="90dp" />
 
@@ -153,11 +155,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="."
+                            android:text="@string/dot"
                             android:textSize="24sp" />
 
                         <NumberPicker
-                            android:id="@+id/numberPesoDecimal"
+                            android:id="@+id/decimalNumberWeight"
                             android:layout_width="wrap_content"
                             android:layout_height="90dp" />
 
@@ -165,13 +167,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text=" Kg"
+                            android:text="@string/kg"
                             android:textSize="24sp" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/contenedorRepeticiones"
+                    android:id="@+id/repetitionsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="120dp"
@@ -182,10 +184,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/icon_sets"
+                        android:drawableStart="@drawable/icon_sets"
                         android:layout_gravity="center"
-                        android:text="Repeticiones y series"
-                        android:textSize="24sp" />
+                        android:text="@string/repetitionsAndSeries"
+                        android:textSize="24sp"
+                        tools:ignore="UseCompatTextViewDrawableXml"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -194,7 +197,7 @@
                         android:textAlignment="center">
 
                         <NumberPicker
-                            android:id="@+id/numberRepeticiones"
+                            android:id="@+id/repetitionsNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="90dp" />
 
@@ -202,17 +205,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="x"
+                            android:text="@string/x"
                             android:textSize="24sp" />
 
                         <NumberPicker
-                            android:id="@+id/numberVeces"
+                            android:id="@+id/timesNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="90dp" />
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/contenedorTiempo"
+                    android:id="@+id/timeContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="240dp"
@@ -224,9 +227,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:drawableLeft="@drawable/icon_time"
-                        android:text="Tiempo"
-                        android:textSize="24sp" />
+                        android:drawableStart="@drawable/icon_time"
+                        android:text="@string/time"
+                        android:textSize="24sp"
+                        tools:ignore="UseCompatTextViewDrawableXml"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -243,7 +247,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text=":"
+                            android:text="@string/colon"
                             android:textSize="24sp" />
 
                         <NumberPicker
@@ -255,14 +259,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/agnadir"
-                android:layout_width="match_parent"
+                android:id="@+id/add"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_gravity="center"
-                android:text="Añadir"
+                android:text="@string/add"
                 style="@style/BUTTON"/>
         </LinearLayout>
     </ScrollView>

@@ -122,7 +122,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/pesas" />
+                    android:src="@drawable/weights" />
 
                 <TextView
                     android:id="@+id/mayorpesolevantado"

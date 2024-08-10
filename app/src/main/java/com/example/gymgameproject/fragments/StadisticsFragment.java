@@ -31,6 +31,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.util.Objects;
+
 public class StadisticsFragment extends Fragment {
     private static FragmentStadisticsBinding binding;
     private static Entry pesoSeleccionado = new Entry();
@@ -52,18 +54,18 @@ public class StadisticsFragment extends Fragment {
             binding.textoInfo.setVisibility(View.GONE);
         }
         if(MainActivity.getAdvanceOB()==null){
-            MainActivity.setAvanceOB(new Advance());
+            MainActivity.setAdvanceOB(new Advance());
         }
         AppHelper.weightChartConfiguration(binding);
         AppHelper.ChartAdvanceconfiguration(binding);
 
-        binding.aniadirPeso.setOnClickListener(new View.OnClickListener() {
+        binding.addWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showBottonSheetPeso(true);
             }
         });
-        binding.aniadirObjetivo.setOnClickListener(new View.OnClickListener() {
+        binding.addTarget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showBottonSheetPeso(false);
@@ -90,13 +92,13 @@ public class StadisticsFragment extends Fragment {
             @Override
             public void onNothingSelected() {}
         });
-        binding.eliminarPeso.setOnClickListener(new View.OnClickListener() {
+        binding.removeWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showEliminarElemento("¿Desehas eliminar ese registro?", true);
             }
         });
-        binding.eliminarAvance.setOnClickListener(new View.OnClickListener() {
+        binding.removeAdvance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showEliminarElemento("¿Desehas eliminar ese progreso?", false);
@@ -136,8 +138,8 @@ public class StadisticsFragment extends Fragment {
             numberDecimalObWeight.setMinValue(0);numberDecimalObWeight.setMaxValue(9);
             if(MainActivity.getWeightOB().getTarget()!=null){
                 String[] objetivoArray = MainActivity.getWeightOB().getTarget().split("\\.");
-                numberObWeight.setValue(Integer.valueOf(objetivoArray[0]));
-                numberDecimalObWeight.setValue(Integer.valueOf(objetivoArray[1]));
+                numberObWeight.setValue(Integer.parseInt(objetivoArray[0]));
+                numberDecimalObWeight.setValue(Integer.parseInt(objetivoArray[1]));
             }
         }
         //inicialización de numberPicker**********************fin*
@@ -162,35 +164,35 @@ public class StadisticsFragment extends Fragment {
         });
 
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     /**
-     * Abre un cuadro de diálogo de confirmación para confirmar si se elimina el elemento seleccionado.
-     * En función del elemento eliminado (peso o progreso), se introduce un texto adecuado y true para
-     * eliminar un peso seleccionado o false para un progreso seleccionado.
-     * @param textoInput Texto que se mostrará en el cuadro de diálogo
-     * @param esPeso True o false para peso seleccionado o progreso respectivamente.
+     * Opens a confirmation dialog box to confirm whether to delete the selected item.
+     * Depending on the item removed (weight or progress), appropriate and true text is entered for
+     * remove a selected weight or false for a selected progress.
+     * @param textInput Text to be displayed in the dialog
+     * @param isWeight True or false for selected weight or progress respectively.
      */
-    public void showEliminarElemento(String textoInput, boolean esPeso) {
+    public void showEliminarElemento(String textInput, boolean isWeight) {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.my_bottom_sheet_overwrite_routine);
         TextView texto = dialog.findViewById(R.id.textView2);
-        texto.setText(textoInput);
+        texto.setText(textInput);
         Button si = dialog.findViewById(R.id.si);
         Button no = dialog.findViewById(R.id.no);
         System.out.println(pesoSeleccionado);
         si.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(esPeso){
+                if(isWeight){
                     if(binding.lineChart.getLineData().getDataSets().get(0).getEntryCount()>1){
                         //! no puede ser aplicaco a tipo float
                         if(pesoSeleccionado.getY()==0.0){
-                            AppHelper.escribirToast("Debes seleccionar un registro", getContext());
+                            AppHelper.writeToast("Debes seleccionar un registro", getContext());
                         }else{
                             int index = binding.lineChart.getLineData().getDataSetByIndex(0).getEntryIndex(pesoSeleccionado);
                             MainActivity.getWeightOB().getWeightData().remove(index);
@@ -198,7 +200,7 @@ public class StadisticsFragment extends Fragment {
                             AppHelper.updateWeight(MainActivity.getWeightOB());
                         }
                     }else{
-                        AppHelper.escribirToast("Debe haber al menos un registro", getContext());
+                        AppHelper.writeToast("Debe haber al menos un registro", getContext());
                     }
                 }else{
                     if(binding.barChart.getBarData().getDataSets().get(0).getEntryCount()>0){
@@ -218,14 +220,11 @@ public class StadisticsFragment extends Fragment {
             }
         });
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
-    /**
-     * @return El objeto binding del fragmento.
-     */
     public static FragmentStadisticsBinding getBinding(){
         return StadisticsFragment.binding;
     }

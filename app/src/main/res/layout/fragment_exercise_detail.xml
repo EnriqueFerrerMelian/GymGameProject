@@ -50,7 +50,7 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/apertura_con_mancuernas" />
+                    android:src="@drawable/dumbbell_opening" />
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -69,7 +69,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/categoria"
+                    android:id="@+id/category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -95,7 +95,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/detailMusculos"
+                    android:id="@+id/detailMuscles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -155,11 +155,11 @@
                         android:gravity="center"
                         android:textAlignment="center">
                         <TextView
-                            android:id="@+id/numPeso"
+                            android:id="@+id/weigthNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:labelFor="@+id/numPeso"
+                            android:labelFor="@+id/weigthNum"
                             android:text="@string/espacio"
                             android:textSize="24sp" />
                     </LinearLayout>
@@ -189,7 +189,7 @@
                         android:textAlignment="center">
 
                         <TextView
-                            android:id="@+id/numRepeticiones"
+                            android:id="@+id/numRepetitions"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -199,7 +199,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/contenedorTiempo"
+                    android:id="@+id/timeContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="140dp"
@@ -223,7 +223,7 @@
                         android:textAlignment="center">
 
                         <TextView
-                            android:id="@+id/numTiempo"
+                            android:id="@+id/numTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

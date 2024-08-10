@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".rutinas.DetallesRutinaFragment"
+    tools:context=".routines.RoutineDetailFragment"
     style="@style/SCREEN">
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -18,21 +18,22 @@
         app:layout_constraintStart_toStartOf="parent" >
 
         <ImageButton
-            android:id="@+id/imagen"
+            android:id="@+id/image"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@color/white"
-            android:src="@drawable/icono_camara" />
+            android:contentDescription="@string/dottedButton"
+            android:src="@drawable/icon_camera" />
 
         <TextView
-            android:id="@+id/nombreDeRutina"
+            android:id="@+id/routineName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="35dp"
-            android:text="Nombre de rutina"
+            android:text=""
             android:textColor="#121212"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,65 +51,67 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/lunes"
+            android:id="@+id/monday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="L"
-            style="@style/SEMANA"/>
+            android:paddingStart="10dp"
+            android:text="@string/mon"
+            style="@style/week"
+            tools:ignore="RtlSymmetry"/>
 
         <TextView
-            android:id="@+id/martes"
+            android:id="@+id/tuesday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="M"
-            style="@style/SEMANA"/>
+            android:paddingStart="10dp"
+            android:text="@string/tue"
+            style="@style/week"
+            tools:ignore="RtlSymmetry"/>
 
         <TextView
-            android:id="@+id/miercoles"
+            android:id="@+id/wednesday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="X"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:text="@string/wed"
+            style="@style/week"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
-            android:id="@id/jueves"
+            android:id="@id/thursday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="J"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:text="@string/thu"
+            style="@style/week"
+            tools:ignore="RtlSymmetry"/>
 
         <TextView
-            android:id="@+id/viernes"
+            android:id="@+id/friday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="V"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:text="@string/fry"
+            style="@style/week"
+            tools:ignore="RtlSymmetry"/>
 
         <TextView
-            android:id="@+id/sabado"
+            android:id="@+id/saturday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="S"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:text="@string/sat"
+            style="@style/week"
+            tools:ignore="RtlSymmetry"/>
 
         <TextView
-            android:id="@+id/domingo"
+            android:id="@+id/sunday"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:paddingLeft="10dp"
-            android:text="D"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:text="@string/sun"
+            style="@style/week"
+            tools:ignore="RtlSymmetry"/>
 
     </LinearLayout>
 
@@ -148,11 +151,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/modify"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_weight="1"
-            android:text="Modify"
+            android:text="@string/modify"
             android:textAllCaps="false"
             android:textStyle="bold"
             style="@style/BUTTON"/>

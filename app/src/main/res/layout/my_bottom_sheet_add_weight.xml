@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Weight"
+            android:text="@string/weight"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -45,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="."
+                android:text="@string/dot"
                 android:textSize="24sp" />
 
             <NumberPicker
@@ -57,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=" Kg"
+                android:text="@string/kg"
                 android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
@@ -79,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Objetivo"
+            android:text="@string/target"
             android:textSize="24sp" />
 
         <LinearLayout
@@ -98,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="."
+                android:text="@string/dot"
                 android:textSize="24sp" />
 
             <NumberPicker
@@ -110,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=" Kg"
+                android:text="@string/kg"
                 android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
@@ -127,22 +126,24 @@
         android:gravity="center">
 
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/add"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/verdeOscuro"
-            android:text="Añadir"
+            android:backgroundTint="@color/darkGreen"
+            android:text="@string/add"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/cancel"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/verdeOscuro"
-            android:text="Cancelar"
+            android:backgroundTint="@color/darkGreen"
+            android:text="@string/cancel"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </LinearLayout>

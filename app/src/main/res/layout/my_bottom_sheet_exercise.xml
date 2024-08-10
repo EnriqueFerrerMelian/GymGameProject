@@ -9,7 +9,7 @@
 
 
     <LinearLayout
-        android:id="@+id/peso"
+        android:id="@+id/weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -19,10 +19,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_weight"
             android:layout_gravity="center"
-            android:text="@string/peso"
-            android:textSize="24sp" />
+            android:text="@string/weight"
+            android:textSize="24sp"
+            app:drawableLeftCompat="@drawable/icon_weight" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:textAlignment="center">
 
             <NumberPicker
-                android:id="@+id/numberPeso"
+                android:id="@+id/weightNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -39,11 +39,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="."
+                android:text="@string/dot"
                 android:textSize="24sp" />
 
             <NumberPicker
-                android:id="@+id/numberPesoDecimal"
+                android:id="@+id/weigthNumberDecimal"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -51,13 +51,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=" Kg"
+                android:text="@string/kg"
                 android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/repeticiones_series"
+        android:id="@+id/series_repetitions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -68,10 +68,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_sets"
             android:layout_gravity="center"
-            android:text="Repeticiones y series"
-            android:textSize="24sp" />
+            android:text="@string/repetitionsAndSeries"
+            android:textSize="24sp"
+            app:drawableLeftCompat="@drawable/icon_sets" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
             android:textAlignment="center">
 
             <NumberPicker
-                android:id="@+id/repeticiones"
+                android:id="@+id/repetitions"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="x"
+                android:text="@string/x"
                 android:textSize="24sp" />
 
             <NumberPicker
@@ -98,7 +98,7 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/tiempoLayout"
+        android:id="@+id/timeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -109,10 +109,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_time"
             android:layout_gravity="center"
-            android:text="Tiempo"
-            android:textSize="24sp" />
+            android:text="@string/time"
+            android:textSize="24sp"
+            app:drawableLeftCompat="@drawable/icon_time" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
             android:textAlignment="center">
 
             <NumberPicker
-                android:id="@+id/minutos"
+                android:id="@+id/minutes"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
 
@@ -129,11 +129,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=" : "
+                android:text="@string/colon"
                 android:textSize="24sp" />
 
             <NumberPicker
-                android:id="@+id/segundos"
+                android:id="@+id/seconds"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp" />
         </LinearLayout>
@@ -143,22 +143,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <Button
-            android:id="@+id/aceptar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/accept"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:text="Aceptar"
+            android:text="@string/accept"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:backgroundTint="@color/verdeOscuro"/>
+            android:backgroundTint="@color/darkGreen"/>
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/cancel"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:text="Cancelar"
+            android:text="@string/cancel"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:backgroundTint="@color/verdeOscuro"/>
+            android:backgroundTint="@color/darkGreen"/>
     </LinearLayout>
 </LinearLayout>

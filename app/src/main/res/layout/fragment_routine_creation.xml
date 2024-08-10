@@ -6,89 +6,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".rutinas.CreacionRutinaFragment"
+    tools:context=".routines.RoutineCreationFragment"
     style="@style/SCREEN">
 
     <LinearLayout
-        android:id="@+id/cabecera"
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/dias"
+        app:layout_constraintBottom_toTopOf="@+id/days"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/editarImagen"
+            android:id="@+id/editImage"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:background="@color/white"
-            android:src="@drawable/icono_camara" />
+            android:contentDescription="@string/routineImage"
+            android:src="@drawable/icon_camera" />
 
         <EditText
-            android:id="@+id/nombreDeRutina"
+            android:id="@+id/routineName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:autofillHints=""
             android:inputType="text"
-            android:hint="Nombre de rutina"
-            android:textSize="24dp" />
+            android:hint="@string/routineName"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dias"
+        android:id="@+id/days"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/cabecera"
-        app:layout_constraintBottom_toTopOf="@+id/nombreDias"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintBottom_toTopOf="@+id/daysName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <CheckBox
-            android:id="@+id/lunes"
+            android:id="@+id/monday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <CheckBox
-            android:id="@+id/martes"
+            android:id="@+id/tuesday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <CheckBox
-            android:id="@+id/miercoles"
+            android:id="@+id/wednesday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <CheckBox
-            android:id="@+id/jueves"
+            android:id="@+id/thuesday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <CheckBox
-            android:id="@+id/viernes"
+            android:id="@+id/friday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <CheckBox
-            android:id="@+id/sabado"
+            android:id="@+id/saturday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <CheckBox
-            android:id="@+id/domingo"
+            android:id="@+id/sunday"
             android:layout_width="48dp"
             android:layout_height="48dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/nombreDias"
+        android:id="@+id/daysName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -97,60 +99,61 @@
         app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dias">
+        app:layout_constraintTop_toBottomOf="@+id/days">
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="L"
+            android:text="@string/mon"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="M"
+            android:text="@string/tue"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="X"
+            android:text="@string/wed"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="J"
+            android:text="@string/thu"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="V"
+            android:text="@string/fry"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="S"
+            android:text="@string/sat"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
 
         <TextView
             android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="D"
+            android:text="@string/sun"
             android:textAlignment="center"
-            style="@style/SEMANA"/>
+            style="@style/week"/>
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        app:layout_constraintTop_toBottomOf="@+id/nombreDias"
+        android:contentDescription="@string/floatingDescButton"
+        app:layout_constraintTop_toBottomOf="@+id/daysName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -158,7 +161,7 @@
         android:backgroundTint="@color/azulLogo"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/pesas"
+        android:src="@drawable/weights"
         android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -176,7 +179,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
-        tools:listitem="@layout/item_ejercicio" />
+        tools:listitem="@layout/item_exercise" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -194,21 +197,21 @@
             android:id="@+id/aceptar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_weight="1"
             android:textAllCaps="false"
-            android:text="Aceptar"
+            android:text="@string/accept"
             android:textStyle="bold"
-            android:backgroundTint="@color/verdeOscuro"
+            android:backgroundTint="@color/darkGreen"
             style="@style/BUTTON"/>
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
             android:layout_weight="1"
             android:textAllCaps="false"
-            android:text="Cancelar"
+            android:text="@string/cancel"
             android:textStyle="bold"
             style="@style/BUTTON"/>
 

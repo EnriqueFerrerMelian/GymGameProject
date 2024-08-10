@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,14 +12,15 @@
         android:layout_height="match_parent" >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/activityImg"
                 android:layout_width="match_parent"
                 android:layout_height="236dp"
-                android:src="@drawable/actividad_ejercicio_r" />
+                android:contentDescription="@string/background"
+                android:src="@drawable/exercise_activity_r" />
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
@@ -35,18 +35,18 @@
                     android:id="@+id/activityName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="NombreActividad"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="#252525"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Descripción: "
+                    android:text="@string/description"
                     android:textColor="#252525"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/activityDescription"
@@ -54,14 +54,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="#252525"
-                    android:textSize="20dp"/>
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Profesor: "
+                    android:text="@string/teacher"
                     android:textColor="#252525"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/activityTeacher"
@@ -69,14 +69,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="#252525"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Vacnates: "
+                    android:text="@string/vacancies"
                     android:textColor="#252525"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/activityVacancies"
@@ -84,14 +84,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="#252525"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Horarios: "
+                    android:text="@string/schedule"
                     android:textColor="#252525"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/activitySchedules"
@@ -99,14 +99,14 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="#252525"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Precio: "
+                    android:text="@string/price"
                     android:textColor="#252525"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/activityPrices"
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="#252525"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"
@@ -128,64 +128,71 @@
                         android:id="@+id/monday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="MON"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/mon"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@+id/tuesday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="TUE"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/tue"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@+id/wednesday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="WED"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/wed"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@id/thursday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="THU"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/thu"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@+id/friday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="FRY"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/fry"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@+id/saturday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="SAT"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/sat"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@+id/sunday"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:paddingLeft="10dp"
-                        android:text="SUN"
-                        android:textSize="24dp"
-                        android:textStyle="bold" />
+                        android:paddingStart="10dp"
+                        android:text="@string/sun"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -201,21 +208,21 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/reserve"
-                    android:layout_width="match_parent"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="1dp"
+                    android:layout_marginStart="1dp"
                     android:layout_weight="1"
-                    android:text="Reservar"
+                    android:text="@string/reserve"
                     android:textAllCaps="false"
                     style="@style/BUTTON"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/deleteReservation"
-                    android:layout_width="match_parent"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="1dp"
+                    android:layout_marginStart="1dp"
                     android:layout_weight="1"
-                    android:text="Eliminar Reserva"
+                    android:text="@string/removeReservation"
                     android:textAllCaps="false"
                     style="@style/BUTTON"/>
 

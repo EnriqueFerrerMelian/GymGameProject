@@ -35,18 +35,20 @@ import com.example.gymgameproject.classes.AppHelper;
 import com.example.gymgameproject.databinding.FragmentProfileBinding;
 import com.example.gymgameproject.routines.RoutineCreationFragment;
 
+import java.util.Objects;
+
 public class ProfileFragment extends Fragment {
     private static FragmentProfileBinding binding;
-    private static Uri imgUri = Uri.parse(" ");//contiene las imagenes de galeria y camara durante su administración
+    private static Uri imgUri = Uri.parse(" ");// contains de images of the gallery and camera during the management
     private ActivityResultLauncher<Intent> camaraLauncher;
     private ActivityResultLauncher<Intent> galeriaLauncher;
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        cameraLauncher();// Inicializar el ActivityResultLauncher de la camara
-        galleryLauncher();// Inicializar el ActivityResultLauncher, de la galeria
-        AppHelper.cambiarToolbarText("Perfil");
+        cameraLauncher();//  initialize the camera ActivityResultLauncher
+        galleryLauncher();// initialize the gallery ActivityResultLauncher
+        AppHelper.cambiarToolbarText("Profile");
         AppHelper.cargaPerfil(binding, getContext());
         binding.modificarCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,15 +68,15 @@ public class ProfileFragment extends Fragment {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.my_bottom_sheet_change_password);
-        Button aceptar = dialog.findViewById(R.id.aceptar);
+        Button accept = dialog.findViewById(R.id.accept);
         Button cancel = dialog.findViewById(R.id.cancel);
-        EditText nombre = dialog.findViewById(R.id.nombre);
-        EditText passAntiguo = dialog.findViewById(R.id.passAntiguo);
-        EditText passNuevo = dialog.findViewById(R.id.passNuevo);
-        aceptar.setOnClickListener(new View.OnClickListener() {
+        EditText name = dialog.findViewById(R.id.name);
+        EditText oldPass = dialog.findViewById(R.id.oldPass);
+        EditText newPass = dialog.findViewById(R.id.newPass);
+        accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppHelper.cambiarDatos(nombre,passAntiguo,passNuevo, getContext());
+                AppHelper.cambiarDatos(name,oldPass,newPass, getContext());
                 dialog.dismiss();
             }
         });
@@ -91,8 +93,8 @@ public class ProfileFragment extends Fragment {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
     /**
-     * Abre un cuadro de diálogo desde donde se seleccionará añadir una imagen desde la galería
-     * o desde la cámara
+     * Opens a dialog box where you can add images from the gallery
+     * or camera
      */
     public void showImgOpt() {
         final Dialog dialog = new Dialog(getContext());
@@ -112,43 +114,42 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int permissionCheck = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA);
-                if (permissionCheck != PackageManager.PERMISSION_GRANTED) { // Si no tiene permiso
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 225); // Solicitar permiso
+                if (permissionCheck != PackageManager.PERMISSION_GRANTED) { // if don't have permision
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 225); // ask permision
                 } else {
-                    // Crear un Intent para abrir la cámara
+                    // create an intent to open the camera
                     Intent camaraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    // Iniciar el ActivityResultLauncher para la cámara
+                    // initialize camera ActivityResultLauncher
                     camaraLauncher.launch(camaraIntent);
                     dialog.dismiss();
                 }
             }
         });
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
     public void cameraLauncher() {
-        //obtendra la imagen como Bitmap por defecto
+        // obtains a bitmap image by default
         camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
-                        //capturamos imagen
+                        // get an image
                         Intent data = result.getData();
                         if (data != null) {
-                            // Obtener la imagen como un bitmap
+                            // get bitmap image
                             Bundle extras = data.getExtras();
                             if (extras != null) {
                                 Bitmap bitmap = (Bitmap) extras.get("data");
                                 Glide.with(getContext())
                                         .load(bitmap)
-                                        .placeholder(R.drawable.iconogris)//si no hay imagen carga una por defecto
+                                        .placeholder(R.drawable.iconogris)// if there is no image, will load one by default
                                         .circleCrop()
-                                        .error(R.drawable.iconogris)//si ocurre algún error se verá por defecto
+                                        .error(R.drawable.iconogris)
                                         .into(binding.img);
                                 if(bitmap!=null) {
-                                    AppHelper.saveUserAvatar(RoutineCreationFragment.getImageUri(getContext(), bitmap))
-                                            .toString();
+                                    AppHelper.saveUserAvatar(RoutineCreationFragment.getImageUri(getContext(), bitmap));
                                 }
                             }
                         }
@@ -156,26 +157,22 @@ public class ProfileFragment extends Fragment {
                 });
     }
     public void galleryLauncher() {
-        //obtendra la imagen como Uri por defecto
         galeriaLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
-                        //capturamos imagen
                         Intent data = result.getData();
 
                         if (data != null) {
-                            // Obtener la imagen como un bitmap
                             Bundle extras = data.getExtras();
                             if (extras != null) {
                                 Bitmap bitmap = (Bitmap) extras.get("data");
                             } else {
-                                // Si no hay datos extras, utilizar la Uri para cargar la imagen
                                 Glide.with(getContext())
                                         .load(data.getData())
-                                        .placeholder(R.drawable.iconogris)//si no hay imagen carga una por defecto
+                                        .placeholder(R.drawable.iconogris)
                                         .circleCrop()
-                                        .error(R.drawable.iconogris)//si ocurre algún error se verá por defecto
+                                        .error(R.drawable.iconogris)
                                         .into(binding.img);
                                 AppHelper.saveUserAvatar(data.getData());
                             }
