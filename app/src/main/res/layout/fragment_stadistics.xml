@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragmentos.EstadisticasFragment"
+    tools:context=".fragments.StadisticsFragment"
     style="@style/SCREEN">
     <TextView
         android:id="@+id/textoInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Debe refrescarse la pantalla al insertar datos por primera vez."
-        android:textSize="14dp"
+        android:text="@string/refresh"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/TEXT"/>
@@ -26,7 +26,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -43,35 +43,35 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/pesoTV"
+                        android:id="@+id/weightTV"
                         style="@style/TEXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Peso"
+                        android:text="@string/weight"
                         android:textAlignment="center"
-                        android:textSize="22dp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/ultimoTV"
+                        android:id="@+id/lastTV"
                         style="@style/TEXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Último peso añadido"
-                        android:textSize="18dp"
+                        android:text="@string/lastWeight"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/ultimoPeso"
+                        android:id="@+id/lastWeight"
                         style="@style/TEXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="último peso añadido"
-                        android:textSize="20dp"
+                        android:text=""
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/ultimoTV" />
+                        app:layout_constraintTop_toBottomOf="@id/lastTV" />
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/lineChart"
@@ -82,10 +82,10 @@
                         android:background="@color/white"
                         android:scrollbarAlwaysDrawHorizontalTrack="true"
                         android:scrollbars="horizontal"
-                        app:layout_constraintTop_toBottomOf="@id/ultimoPeso" />
+                        app:layout_constraintTop_toBottomOf="@id/lastWeight" />
 
                     <LinearLayout
-                        android:id="@+id/botonesLayout"
+                        android:id="@+id/buttonsLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -93,35 +93,35 @@
                         app:layout_constraintTop_toBottomOf="@id/lineChart">
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/aniadirPeso"
+                            android:id="@+id/addWeight"
                             style="@style/BUTTON"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:text="Añadir peso"
+                            android:text="@string/addWeight"
                             android:textAllCaps="false"
                             android:textStyle="bold" />
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/aniadirObjetivo"
+                            android:id="@+id/addTarget"
                             style="@style/BUTTON"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:text="Añadir objetivo"
+                            android:text="@string/addTarget"
                             android:textAllCaps="false"
                             android:textStyle="bold" />
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/eliminarPeso"
+                            android:id="@+id/removeWeight"
                             style="@style/BUTTON"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:text="Eliminar peso"
+                            android:text="@string/removeWeight"
                             android:textAllCaps="false"
                             android:textStyle="bold" />
 
@@ -144,37 +144,37 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/progresoTV"
+                        android:id="@+id/progressTV"
                         style="@style/TEXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Progreso"
+                        android:text="@string/progress"
                         android:textAlignment="center"
-                        android:textSize="22dp"
+                        android:textSize="22sp"
                         android:textStyle="bold"
                         app:layout_constraintTop_toBottomOf="@id/divider1" />
 
                     <TextView
-                        android:id="@+id/ultimoPesoTV"
+                        android:id="@+id/lastProgressTV"
                         style="@style/TEXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Último progreso actualizado"
-                        android:textSize="18dp"
+                        android:text="@string/lastProgress"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/progresoTV" />
+                        app:layout_constraintTop_toBottomOf="@id/progressTV" />
 
                     <TextView
-                        android:id="@+id/ultimoProgreso"
+                        android:id="@+id/lastProgress"
                         style="@style/TEXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Último progreso añadido"
-                        android:textSize="20dp"
+                        android:text=""
+                        android:textSize="20sp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/ultimoPesoTV" />
+                        app:layout_constraintTop_toBottomOf="@id/lastProgressTV" />
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/barChart"
@@ -185,10 +185,10 @@
                         android:background="@color/white"
                         android:scrollbarAlwaysDrawHorizontalTrack="true"
                         android:scrollbars="horizontal"
-                        app:layout_constraintTop_toBottomOf="@id/ultimoProgreso" />
+                        app:layout_constraintTop_toBottomOf="@id/lastProgress" />
 
                     <LinearLayout
-                        android:id="@+id/botonLayout"
+                        android:id="@+id/buttonLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -196,13 +196,13 @@
                         app:layout_constraintTop_toBottomOf="@id/barChart">
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/eliminarAvance"
+                            android:id="@+id/removeAdvance"
                             style="@style/BUTTON"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginStart="1dp"
                             android:layout_weight="1"
-                            android:text="Eliminar registro seleccionado"
+                            android:text="@string/removeRecord"
                             android:textAllCaps="false"
                             android:textStyle="bold" />
                     </LinearLayout>

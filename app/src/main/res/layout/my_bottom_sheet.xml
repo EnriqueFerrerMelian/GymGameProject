@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,8 +14,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Imagen de rutina"
-            android:textSize="22dp"
+            android:text="@string/routineImage"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#191919"
             android:layout_margin="8dp"/>
@@ -37,23 +36,24 @@
                 android:id="@+id/camara"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/icono_camara" />
+                android:contentDescription="@string/cameraImgDes"
+                android:src="@drawable/icon_camera" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="90dp"
-                android:textSize="24dp"
+                android:layout_marginStart="90dp"
+                android:textSize="24sp"
                 android:textColor="#2B2B2B"
-                android:text="Cámara"/>
+                android:text="@string/camera"/>
         </androidx.cardview.widget.CardView>
 
 
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/galeriaLayout"
+        android:id="@+id/galleryLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -65,21 +65,21 @@
             app:cardCornerRadius="10dp"
             android:elevation="9dp">
             <ImageView
-                android:id="@+id/galeria"
+                android:id="@+id/gallery"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/icono_galeria"/>
+                android:contentDescription="@string/galleryImgDes"
+                android:src="@drawable/gallery_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="90dp"
-                android:textSize="24dp"
+                android:layout_marginStart="90dp"
+                android:textSize="24sp"
                 android:textColor="#2B2B2B"
-                android:text="Galería"/>
+                android:text="@string/gallery"/>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-
 </LinearLayout>

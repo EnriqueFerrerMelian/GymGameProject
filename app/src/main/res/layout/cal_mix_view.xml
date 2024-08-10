@@ -12,7 +12,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:cardCornerRadius="4dp"
-        app:cardBackgroundColor="@color/verdeOscuro">
+        app:cardBackgroundColor="@color/darkGreen">
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"

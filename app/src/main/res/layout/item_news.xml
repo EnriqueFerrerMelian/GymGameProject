@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -40,6 +39,7 @@
                 android:layout_height="160dp"
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
+                android:contentDescription="@string/newsImgDes"
                 android:src="@drawable/logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.068"
@@ -52,7 +52,7 @@
                 android:layout_width="174dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
-                android:text="I'm a title"
+                android:text=""
                 android:textColor="@color/azulLogo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.82"
@@ -65,7 +65,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="I'm a subhead"
+                android:text=""
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.732"
                 app:layout_constraintStart_toStartOf="parent"

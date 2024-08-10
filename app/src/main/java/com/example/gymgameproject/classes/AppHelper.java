@@ -72,58 +72,51 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public class AppHelper {
-    private static Uri imgUriFb = Uri.parse(" ");
-    private static StorageReference storageReference;
+    //private static final Uri imgUriFb = Uri.parse(" ");
     //SECURITY****************************************************************
 
-    private static final String algorithSks = "AES";
-    private static final String algorithSha = "SHA-256";//algoritmo de hal seguro
-    private static final String charSet = "UTF-8";//codificacion de texto
+    private static final String algorithmSks = "AES";
+    private static final String algorithmSha = "SHA-256";// secure algorithm hal
+    private static final String charSet = "UTF-8";// text codification
 
     /**
      * Cypher the password using codification key
-     * @param clave
-     * @param password
      * @return String
      */
-    public static String encript(String clave, String password){
+    public static String encrypt(String key, String password){
         try{
-            SecretKeySpec secretKeySpec = generateKey(clave);//crea una llave de encriptacion
-            Cipher cipher = Cipher.getInstance(algorithSks);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);//genera un modo de encriptacion con la key como raiz
-            byte[] datosEncriptadosBytes = cipher.doFinal(password.getBytes());//encriptamos el password y lo pasamos a bytes
-            String datosEncriptadosString = Base64.encodeToString(datosEncriptadosBytes, Base64.DEFAULT);//lo pasamos a String
-            return datosEncriptadosString;
+            SecretKeySpec secretKeySpec = generateKey(key);//create encrypted key
+            Cipher cipher = Cipher.getInstance(algorithmSks);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);// generates an encryption mode with the key as root
+            byte[] encryptedDataBytes = cipher.doFinal(password.getBytes());// encrypt the password and pass it to bytes
+            return Base64.encodeToString(encryptedDataBytes, Base64.DEFAULT);
 
         }catch(Exception e){
             throw new RuntimeException(e);
         }
     }
     /**
-     * Crea una llave de codificación
-     * @param clave
+     * Create an encryption key
      * @return SecretKeySpec
      */
-    private static SecretKeySpec generateKey(String clave) {
+    private static SecretKeySpec generateKey(String key1) {
         try {
-            MessageDigest sha = MessageDigest.getInstance(algorithSha);
-            byte[] key = clave.getBytes(charSet);
+            MessageDigest sha = MessageDigest.getInstance(algorithmSha);
+            byte[] key = key1.getBytes(charSet);
             key = sha.digest(key);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(key, algorithSks);
-            return secretKeySpec;
+            return new SecretKeySpec(key, algorithmSks);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
-    //SEGURIDAD*************************************************************FIN
+    //SECURITY*************************************************************END
 
-    // ESTADÍSTICAS**********************************ESTADÍSTICAS**********************************
-    //TODOS LOS MÉTODOS DEL FRAGMENTO ESTADISTICAS AQUÍ
+    // STADISTICS**********************************STADISTICS**********************************
     /**
      * Update weight data, then will pass them
      * to the database.
      * @param weight Weight selected, transformed to String.
-     * @return Objeto Peso con los datos actualizados
+     * @return Objeto Weight with updated data
      */
     public static Weight addWeightData(String weight){//addDatosPeso
         //Get today's date
@@ -140,7 +133,7 @@ public class AppHelper {
 
         return MainActivity.getWeightOB();
     }
-    public static Weight addTargetData(String target){//addDatosObjetivo
+    public static Weight addTargetData(String target){// addDatosObjetivo
         MainActivity.getWeightOB().setTarget(target);
         return MainActivity.getWeightOB();
     }
@@ -212,7 +205,7 @@ public class AppHelper {
         lineDataSet.setLineWidth(3);
         LineData lineData = new LineData(lineDataSet);
         if(MainActivity.getWeightOB().getWeightData().size()>0){
-            binding.ultimoPeso.setText(MainActivity.getWeightOB().getWeightData().get(MainActivity.getWeightOB().getWeightData().size()-1).get("y") + " Kgs");
+            binding.lastWeight.setText(MainActivity.getWeightOB().getWeightData().get(MainActivity.getWeightOB().getWeightData().size()-1).get("y") + " Kgs");
         }
         //>>>****LOADING DATA*****FIN
 
@@ -284,7 +277,7 @@ public class AppHelper {
         String lastInputValue = MainActivity.getAdvanceOB().getExercisesName()
                 .isEmpty() ? " " : MainActivity.getAdvanceOB()
                 .getExercisesName().get(MainActivity.getAdvanceOB().getExercisesName().size()-1);
-        binding.ultimoProgreso.setText(lastInputValue);
+        binding.lastProgress.setText(lastInputValue);
         //>>>**** INPUT DATA *****end
         binding.barChart.canScrollHorizontally(1);
 
@@ -406,7 +399,7 @@ public class AppHelper {
         ref.setValue(activity).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                escribirToast("Actividad reservada", context);
+                writeToast("Actividad reservada", context);
                 updateVacancy(activity);
             }
         });
@@ -420,7 +413,7 @@ public class AppHelper {
         ref.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                escribirToast("Reserva eliminada", context);
+                writeToast("Reserva eliminada", context);
                 updateVacancy(activity);
             }
         });
@@ -682,7 +675,7 @@ public class AppHelper {
         if(!name.getText().toString().equals("")){
             User user = MainActivity.getUserOB();
             user.setName(name.getText().toString());
-            user.setUser(encript(user.getName(), user.getName()));
+            user.setUser(encrypt(user.getName(), user.getName()));
             DatabaseReference ref = FirebaseDatabase
                     .getInstance("https://gymgameproject-default-rtdb.europe-west1.firebasedatabase.app")
                     .getReference("usuarios/"+MainActivity.getUserOB().getId());
@@ -711,9 +704,9 @@ public class AppHelper {
             if(!oldPassword.getText().toString().equals("")){
                 User user = MainActivity.getUserOB();
                 //abtener clave, codificarla y compararla
-                String passAntiguoEncriptado = encript(oldPassword.getText().toString(), oldPassword.getText().toString());
+                String passAntiguoEncriptado = encrypt(oldPassword.getText().toString(), oldPassword.getText().toString());
                 if(passAntiguoEncriptado.equals(user.getPassword())){
-                    String newEncriptPassword = encript(newPassword.getText().toString(),newPassword.getText().toString());
+                    String newEncriptPassword = encrypt(newPassword.getText().toString(),newPassword.getText().toString());
                     user.setPassword(newEncriptPassword);
                     DatabaseReference ref = FirebaseDatabase
                             .getInstance("https://gymgameproject-default-rtdb.europe-west1.firebasedatabase.app")
@@ -737,10 +730,10 @@ public class AppHelper {
                         }
                     });
                 }else{
-                    escribirToast("La clave antigua no coincide.", context);
+                    writeToast("La clave antigua no coincide.", context);
                 }
             }else{
-                escribirToast("La clave antigua no puede estar vacía.", context);
+                writeToast("La clave antigua no puede estar vacía.", context);
             }
         }
     }
@@ -787,8 +780,8 @@ public class AppHelper {
                 .fitCenter()
                 .override(1000)
                 .into(binding.imageView);
-        binding.titulo.setText(news.getTitulo());
-        binding.contenido.setText(news.getContenido());
+        binding.title.setText(news.getTitulo());
+        binding.content.setText(news.getContenido());
     }
 
     // TABLON****************************************TABLON***********************************FIN
@@ -808,7 +801,7 @@ public class AppHelper {
      * @param texto Texto introducido por el usuario
      * @param context Contexto del fragmento o actividad donde debe visualizarse
      */
-    public static void escribirToast(String texto, Context context){
+    public static void writeToast(String texto, Context context){
         Toast.makeText(context, texto, Toast.LENGTH_LONG).show();
     }
     /**
@@ -832,7 +825,7 @@ public class AppHelper {
                 //actualizo el progreso
                 Advance advance = dataSnapshot.child("avance")
                         .getValue(Advance.class)==null ? new Advance() : dataSnapshot.child("avance").getValue(Advance.class);
-                MainActivity.setAvanceOB(advance);
+                MainActivity.setAdvanceOB(advance);
                 //actualizo las actividades
                 List<Activity> activities = new ArrayList<>();
                 if(dataSnapshot.child("actividades").getValue()!=null){
@@ -858,7 +851,7 @@ public class AppHelper {
         });
     }
     public static void cambiarToolbarText(String titulo){
-        MainMenu.getBinding().toolbar.setTitle(titulo);
+        MainMenu.getBinding().toolBar.setTitle(titulo);
     }
 
     /**
@@ -871,7 +864,7 @@ public class AppHelper {
         final Uri[] imgUri = {Uri.parse(" ")};
         //creamos una referencia en el Store que será el nombre de la imagen
         String[] titulo = String.valueOf(uri).split("/");
-        storageReference = FirebaseStorage.getInstance().getReference(titulo[titulo.length-1]);
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(titulo[titulo.length - 1]);
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

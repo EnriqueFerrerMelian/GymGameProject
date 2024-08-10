@@ -26,23 +26,22 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMenuPrincipalBinding.inflate(getLayoutInflater());//carga la vista xml al cargar la aplicación
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(binding.toolBar);
 
-        //codigo
-        reemplazarFragmento(new RoutineFragment());
+        replaceFragment(new RoutineFragment());
         //listeners
-        binding.bottomnav.setOnItemSelectedListener(item ->{
+        binding.bottomNav.setOnItemSelectedListener(item ->{
             if(item.getItemId()==R.id.ejercicio){
-                reemplazarFragmento(new RoutineFragment());
+                replaceFragment(new RoutineFragment());
             }
             if(item.getItemId()==R.id.estadisticas){
-                reemplazarFragmento(new StadisticsFragment());
+                replaceFragment(new StadisticsFragment());
             }
             if(item.getItemId()==R.id.actividades){
-                reemplazarFragmento(new ActivitiesFragment());
+                replaceFragment(new ActivitiesFragment());
             }
             if(item.getItemId()==R.id.calendario){
-                reemplazarFragmento(new CalendarFragment());
+                replaceFragment(new CalendarFragment());
             }
             return true;
         });
@@ -57,10 +56,10 @@ public class MainMenu extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.perfil){
-            reemplazarFragmento(new ProfileFragment());
+            replaceFragment(new ProfileFragment());
         }
         if(item.getItemId()==R.id.tablon){
-            reemplazarFragmento(new TabloidFragment());
+            replaceFragment(new TabloidFragment());
         }
         if(item.getItemId()==16908332){
             getSupportFragmentManager().popBackStack();
@@ -70,18 +69,16 @@ public class MainMenu extends AppCompatActivity {
     }
 
     /**
-     * Reemplaza el fragmento en el contenedor 'fragmentContainerView' por el pasado por
-     * parámetro
-     * @param fragmento
+     * Replace the fragment on the container 'fragmentContainerView' by the one passed as param
      */
-    public void reemplazarFragmento(Fragment fragmento){
+    public void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if(fragmentoDesechable!=null){
             fragmentTransaction.remove(fragmentoDesechable);
         }
-        fragmentTransaction.replace(R.id.fragmentContainerView, fragmento);
-        fragmentoDesechable = fragmento;
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
+        fragmentoDesechable = fragment;
         fragmentTransaction.commit();
     }
 

@@ -30,6 +30,7 @@
         android:layout_marginBottom="76dp"
         android:backgroundTint="@color/azulLogo"
         android:clickable="true"
+        android:contentDescription="@string/floatingDescButton"
         android:focusable="true"
         android:src="@drawable/baseline_add_242"
         android:tint="@android:color/white"

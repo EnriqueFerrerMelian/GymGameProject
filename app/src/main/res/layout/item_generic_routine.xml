@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/rutinaImg"
+            android:id="@+id/routineImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/logo"
@@ -27,87 +27,87 @@
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
 
         <TextView
-            android:id="@+id/rutinaNombre"
+            android:id="@+id/routineName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/rutinaImg"
+            android:layout_toEndOf="@+id/routineImage"
             android:layout_marginTop="15dp"
             android:layout_marginStart="30dp"
-            android:text="name"
+            android:text=""
             android:textSize="20sp"
             style="@style/TEXT"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/lunes"
+            android:id="@+id/monday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="30dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/rutinaImg"
-            android:text="L"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/routineImage"
+            android:text="@string/mon"
+            style="@style/week"/>
         <TextView
-            android:id="@+id/martes"
+            android:id="@+id/tuesday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/lunes"
-            android:text="M"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/monday"
+            android:text="@string/tue"
+            style="@style/week"/>
         <TextView
-            android:id="@+id/miercoles"
+            android:id="@+id/wednesday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/martes"
-            android:text="X"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/tuesday"
+            android:text="@string/wed"
+            style="@style/week"/>
         <TextView
-            android:id="@+id/jueves"
+            android:id="@+id/thursday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/miercoles"
-            android:text="J"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/wednesday"
+            android:text="@string/thu"
+            style="@style/week"/>
         <TextView
-            android:id="@+id/viernes"
+            android:id="@+id/friday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/jueves"
-            android:text="V"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/thursday"
+            android:text="@string/fry"
+            style="@style/week"/>
         <TextView
-            android:id="@+id/sabado"
+            android:id="@+id/saturday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/viernes"
-            android:text="S"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/friday"
+            android:text="@string/sat"
+            style="@style/week"/>
         <TextView
-            android:id="@+id/domingo"
+            android:id="@+id/sunday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rutinaNombre"
+            android:layout_below="@+id/routineName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/sabado"
-            android:text="D"
-            style="@style/SEMANA"/>
+            android:layout_toEndOf="@+id/saturday"
+            android:text="@string/sun"
+            style="@style/week"/>
 
         <ImageButton
             android:id="@+id/mas"
@@ -118,8 +118,9 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="2dp"
-            android:layout_toEndOf="@+id/domingo"
+            android:layout_toEndOf="@+id/sunday"
             android:background="@color/white"
+            android:contentDescription="@string/dottedButton"
             android:src="@drawable/mas" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

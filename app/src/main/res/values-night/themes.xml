@@ -26,7 +26,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24dp</item>
     </style>
-    <style name="SEMANA">
+    <style name="week">
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">24dp</item>
