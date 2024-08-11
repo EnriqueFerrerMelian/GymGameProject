@@ -31,7 +31,7 @@
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/listImage01"
             android:singleLine="false"
-            android:text="name"
+            android:text=""
             android:textColor="@color/darkgrey"
             android:textSize="20sp"
             android:textStyle="bold" />

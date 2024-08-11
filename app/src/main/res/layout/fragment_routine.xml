@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="76dp"
-        android:backgroundTint="@color/azulLogo"
+        android:backgroundTint="@color/blueLogo"
         android:clickable="true"
         android:contentDescription="@string/floatingDescButton"
         android:focusable="true"
