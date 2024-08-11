@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calendario.CalendarioFragment"
+    tools:context=".calendar.CalendarFragment"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -24,13 +24,13 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="55dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/logo"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/editarImagen"
+            android:id="@+id/editImage"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentTop="true"
@@ -40,17 +40,16 @@
             android:src="@drawable/baseline_photo_camera_24" />
 
         <TextView
-            android:id="@+id/nombre"
+            android:id="@+id/name"
             android:layout_width="176dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="23dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="35dp"
             android:layout_marginEnd="32dp"
             android:layout_toEndOf="@+id/img"
-            android:text="1234567890"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold" />
@@ -73,7 +72,7 @@
         android:layout_marginTop="8dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/modificarCard"
+            android:id="@+id/modifyCard"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:backgroundTint="#CADEFB"
@@ -82,15 +81,15 @@
             app:cardElevation="20dp">
 
             <TextView
-                android:id="@+id/rutinaNombre"
+                android:id="@+id/routineName"
                 style="@style/TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="101dp"
                 android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/contrasena"
-                android:text="Modificar datos"
-                android:textSize="20dp"
+                android:drawableStart="@drawable/password"
+                android:text="@string/modifyData"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
@@ -106,7 +105,6 @@
             android:id="@+id/cardView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/divider1"
             android:backgroundTint="#CADEFB"
             android:layout_margin="8dp"
             app:cardElevation="20dp"
@@ -118,28 +116,28 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/imgPesas"
+                    android:id="@+id/weightImage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentStart="true"
+                    android:contentDescription="@string/higherWeight"
                     android:src="@drawable/weights" />
 
                 <TextView
-                    android:id="@+id/mayorpesolevantado"
+                    android:id="@+id/higherWeight"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="2dp"
-                    android:layout_toEndOf="@+id/imgPesas"
-                    android:text="Peso aqui"
+                    android:layout_toEndOf="@+id/weightImage"
+                    android:text=""
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/divider3"
             app:cardElevation="20dp"
             android:backgroundTint="#CADEFB"
             android:layout_margin="8dp"
@@ -153,16 +151,17 @@
                     android:id="@+id/imgPeso"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:contentDescription="@string/lastWeight"
                     android:src="@drawable/peso" />
 
                 <TextView
-                    android:id="@+id/kilosyfechadePesolevantado"
+                    android:id="@+id/weightData"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_toEndOf="@+id/imgPeso"
-                    android:text="Peso aqui"
+                    android:text=""
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

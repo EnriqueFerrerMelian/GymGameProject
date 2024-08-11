@@ -158,7 +158,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="380dp"
-        android:backgroundTint="@color/azulLogo"
+        android:backgroundTint="@color/blueLogo"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/weights"
