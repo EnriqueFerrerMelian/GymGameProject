@@ -8,7 +8,7 @@
     tools:context=".fragments.StadisticsFragment"
     style="@style/SCREEN">
     <TextView
-        android:id="@+id/textoInfo"
+        android:id="@+id/textInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -22,7 +22,7 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textoInfo">
+        app:layout_constraintTop_toBottomOf="@id/textInfo">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -151,8 +151,7 @@
                         android:text="@string/progress"
                         android:textAlignment="center"
                         android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/divider1" />
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/lastProgressTV"
@@ -210,6 +209,4 @@
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
